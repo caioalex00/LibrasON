@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css?family=Timmana');
+@import url('https://fonts.googleapis.com/css?family=Prompt');
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+.borda-principal{
+  border-bottom: 4px solid #ff3229;
+}
+
+.InformacoesTelaPrincipal{
+  height: 400px;
+}
+
+.Titulos{
+  font-family: 'Timmana', sans-serif;
+  font-size: 50px;
+}
+
+.Chamada{
+  font-family: 'Timmana', sans-serif;
+  font-size: 30px;
+}
+
+.CustomButtomPrimary{
+  border-color: #3269c4;
+}
+
+.fonteTimmana{
+  font-family: 'Timmana', sans-serif;
+  font-size: 26px;
+}
+
+.CorrecaoDeTamanho{
+  height: 400px;
+}
+
+.SombraAoRedor{
+  -webkit-box-shadow: 0px 0px 33px -2px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 33px -2px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 33px -2px rgba(0,0,0,0.75);
+  index: 2000;
+}
+
+.Rodape{
+  height: 150px;
+  background-color: #f8f8f8;
+  border-top: 4px solid #ff3229;
+}
+
+.Rodape img{
+  width: 200px;
+  margin-top: 10px;
+}
+
+.Rodape p{
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+.Desenvolvedor{
+  height: 100px;
+  background-color: rgb(231, 231, 231);
+  text-align: center;
+  padding-top: 5px;
+  color: rgb(51, 51, 51);
+}
+
+.Desenvolvedor p{
+  margin: 5px;
+}
+
+.Rodape a{
+  color: #3269c4;
+}
+
+.Rodape a:hover{
+  text-decoration: none;
+  color: #ff3229;
+}
+
+a:hover{
+  background: none !important
+}
+
+.TituloModal{
+  font-family: 'Timmana', sans-serif;
+  font-size: 30px;
+  height: 30px;
+}
+
+.input-field label {
+     color: #3269c4;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label, .input-field input[type=password]:focus + label, .input-field input[type=email]:focus + label {
+ color: #3269c4 !important;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus, .input-field input[type=password]:focus, .input-field input[type=email]:focus {
+ border-bottom: 1px solid #3269c4 !important;
+ box-shadow: 0 1px 0 0 #3269c4 !important;
+}
+/* valid color */
+.input-field input[type=text].valid, .input-field input[type=password].valid, .input-field input[type=email].valid {
+ border-bottom: 1px solid #3269c4 !important;
+ box-shadow: 0 1px 0 0 #3269c4 !important;
+}
+
+/* icon prefix focus color */
+.input-field .prefix.active {
+ color: #3269c4 !important;
+}
+
+.btn-color-primeiro{
+ background: #3269c4;
+ color: #FFF;
+}
+
+.btn-color-primeiro:hover{
+ background: #2c5cab;
+ color: #FFF;
+}
+
+.btn-color-secundario{
+ background: #ff3229;
+ color: #FFF;
+}
+
+.btn-color-secundario:hover{
+ background: #ff3229;
+ color: #FFF;
+}
+
+.btn-none-pers:active, .btn-none-pers:after, .btn-none-pers:focus{
+  background: none !important;
+}
+
+.btn, .btn-large, .btn-small {
+  background-color: #3269c4 !important;
+}
+
+.btn:hover, .btn-large:hover, .btn-small:hover {
+  background-color: #4b7fd6 !important;
+}
+
+.Home{
+  min-height: 800px;
+}
+
+.PerfilFoto{
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+}
+
+.PerfilNome{
+  text-align: center;
+  font-family: 'Prompt', sans-serif;
+}
+
+.PerfilMenu{
+  background: url(../img/FundoMenu.png);
+}
+
+.Home{
+  background: url(../img/Fundo.png);
+}
+
+.Container-Home{
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  height: 465px;
+}
+
+.Container-Home2{
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.Tamanho-Home-PrimeiraArea{
+  height: 100%;
+}
+
+.TituloCard{
+  font-family: sans-serif;
+}
+
+.Borda-Card{
+  border-top: 4px solid #3269c4;
+}
+
+.Cards-Funcoes .uk-card{
+  border-top: 4px solid #3269c4;
+}
+
+.CorTituloCard{
+  color: #3269c4 !important;
+}
+
+.bordaPersonalizada{
+  border: 1px solid #3269c4;
+}
+
+.RemoverLinkEstiloPadrão:hover{
+  text-decoration: none;
+}
+
+.sombraCaixa{
+  -webkit-box-shadow: 0px 6px 17px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 6px 17px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 6px 17px 0px rgba(0,0,0,0.75);
+}
+
+.comentario-stilo{
+  background: rgb(239, 244, 254);
+  margin-top: 20px;
+  border: solid 1px rgb(88, 130, 255);
+}
+
+.RecorteDeFoto{
+  height: 500px;
+  border: 4px solid #3269c4;
+  display: inline-block;
+  margin: 20px auto;
+}
+
+.RecorteDeFoto img{
+  height: 100%;
+}
