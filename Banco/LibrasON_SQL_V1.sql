@@ -38,7 +38,34 @@ CREATE TABLE IF NOT EXISTS `LibrasON`.`Curso` (
   `Nome` VARCHAR(80) NOT NULL,
   `Descricao` TEXT NOT NULL,
   `Oferecedor` VARCHAR(100) NOT NULL,
+  `Inscricoes` INT(11) NOT NULL,
+  `Tipo` INT(11) NOT NULL,
   PRIMARY KEY (`idCurso`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `librason`.`Codigo_Geral_Inscricao` (
+  `idCodigo_Geral_Inscricao` INT(11) NOT NULL AUTO_INCREMENT,
+  `Codigo` VARCHAR(45) NOT NULL,
+  `FK_idCurso` INT(11) NOT NULL,
+  PRIMARY KEY (`idCodigo_Geral_Inscricao`),
+    FOREIGN KEY (`FK_idCurso`)
+    REFERENCES `librason`.`curso` (`idCurso`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `librason`.`Informacoes` (
+  `idInformacoes` INT(11) NOT NULL AUTO_INCREMENT,
+  `Regulamento` TEXT NOT NULL,
+  `Certificacao` TEXT NOT NULL,
+  `FK_idCurso` INT(11) NOT NULL,
+  PRIMARY KEY (`idInformacoes`),
+    FOREIGN KEY (`FK_idCurso`)
+    REFERENCES `librason`.`curso` (`idCurso`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -161,8 +188,10 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS `LibrasON`.`Usuario_has_Curso` (
+  `Inscricao` INT(11) NOT NULL AUTO_INCREMENT,
   `FK_idUsuario` INT(11) NOT NULL,
   `FK_idCurso` INT(11) NOT NULL,
+  PRIMARY KEY (`Inscricao`),
     FOREIGN KEY (`FK_idUsuario`)
     REFERENCES `LibrasON`.`Usuario` (`idUsuario`)
     ON DELETE NO ACTION
@@ -174,6 +203,20 @@ CREATE TABLE IF NOT EXISTS `LibrasON`.`Usuario_has_Curso` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+-- Função de vereficar vagas restantes
+
+DELIMITER $$
+
+CREATE FUNCTION verificarVagas (idCurso INT(11))
+RETURNS INTEGER
+BEGIN
+
+DECLARE retorno INT(11);
+
+SELECT count(FK_idCurso) INTO retorno FROM usuario_has_curso WHERE FK_idCurso = idCurso;
+
+RETURN retorno;
+END$$
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

@@ -3,7 +3,7 @@
  * @project: LibrasON
  * @name: Cadastro
  * @description: Classe que contém as funções de cadastro da plataforma
- * @copyright (c) 08/02/2019, Caio Alexandre de Sousa Ramos
+ * @copyright (c) 10/02/2019, Caio Alexandre de Sousa Ramos
  * @author Caio Alexandre De Sousa Ramos
  * @email caioxandres2000@gmail.com
  * @version 2.0

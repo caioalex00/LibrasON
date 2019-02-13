@@ -1,16 +1,30 @@
+<?php
+require_once '../loader.php';
+if(isset($_SESSION['logado'])){
+    if(!$_SESSION['logado']){
+        echo "<script>window.location.href = 'Inicio.php?ERRO=7'</script>";
+    }
+}else{
+    echo "<script>window.location.href = 'Inicio.php?ERRO=7'</script>";
+}
+
+$usuario = $_SESSION['usuario'];
+$idCurso = null;
+
+$cursos = new Curso($idCurso, $usuario);
+
+?>
 <!DOCTYPE html>
-<html lang=pt-br dir="ltr">
+<html lang=pt-br dir="ltr" style="font-size: 15px; ">
   <head>
     <meta charset="utf-8">
     <title>LibrasON - Aprendendo Libras na WEB</title>
     <link rel="icon" href="../favicon.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/uikit.min.css" />
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/uikit.min.js"></script>
     <script src="js/uikit-icons.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="Materializer/css/materialize.css"  media="screen,projection"/>
   </head>
   <body>
     <div>
@@ -28,7 +42,7 @@
               </li>
 
               <li>
-                  <a href="">  Comunidade  </a>
+                  <a href="Comunidades.php">  Comunidade  </a>
               </li>
 
               <li>
@@ -36,7 +50,7 @@
               </li>
 
               <li>
-                  <a href="#offcanvas-nav-primary" uk-toggle>  Nome do Usuário e Sobrenome  </a>
+                  <a href="#offcanvas-nav-primary" uk-toggle>  <?php echo $_SESSION['nome'] . " " . $_SESSION['sobrenome'] ?>  </a>
               </li>
 
           </ul>
@@ -56,35 +70,7 @@
               </div>
             </div>
 
-            <div class="uk-child-width-expand@s Cards-Funcoes" uk-grid>
-            <div>
-                <div class="uk-card uk-card-default uk-card-body uk-card-hover bordaPersonalizada">
-                  <h3 class="uk-card-title CorTituloCard"><img src="img/Icones/IC1.png" alt="" width="30"> Introdução a Libras <span class="uk-label uk-label-success" style="margin: 0px 10px">Inscrições Abertas</span><span class="uk-label uk-label-danger">Inscrições Restantes: 10</span></h3>
-                  <p>Curso de Introdução a Língua Brasileira de Sinais, Aprenda sinais básicos como comprimentos, principais configurações da Libras, classificadores, datilologia e muito mais!</p>
-                  <p uk-margin>
-                    <button class="uk-button uk-button-default uk-button-small">Se inscrever no Curso</button>
-                    <button uk-toggle="target: #InformacoesModal" type="button" class="uk-button uk-button-primary uk-button-small btn-color-primeiro">Informações em Falta?</button>
-                    <button class="uk-button uk-button-secondary uk-button-small btn-color-secundario">Esse curso oferece certificado?</button>
-                    <button class="uk-button uk-button-secondary uk-button-small ">Regulamento dos Cursos</button>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="uk-child-width-expand@s Cards-Funcoes" uk-grid>
-            <div>
-                <div class="uk-card uk-card-default uk-card-body uk-card-hover bordaPersonalizada">
-                  <h3 class="uk-card-title CorTituloCard"><img src="img/Icones/IC1.png" alt="" width="30"> Curso Básico de Libras: IFTO Campûs Araguaína <span class="uk-label uk-label-success" style="margin: 0px 10px">Inscrições Abertas Mediante Código</span><span class="uk-label uk-label-danger">Curso Presencial</span></h3>
-                  <p>Curso de Introdução a Língua Brasileira de Sinais, Aprenda sinais básicos como comprimentos, principais configurações da Libras, classificadores, datilologia e muito mais!</p>
-                  <p uk-margin>
-                    <button class="uk-button uk-button-default uk-button-small">Se inscrever no Curso</button>
-                    <button uk-toggle="target: #InformacoesModal" class="uk-button uk-button-primary uk-button-small btn-color-primeiro">Informações em Falta?</button>
-                    <button class="uk-button uk-button-secondary uk-button-small btn-color-secundario">Esse curso oferece certificado?</button>
-                    <button class="uk-button uk-button-secondary uk-button-small ">Regulamento dos Cursos</button>
-                  </p>
-                </div>
-              </div>
-            </div>
+            <?php $cursos->exibirCursos() ?>
 
           </div>
         </div>
@@ -137,16 +123,16 @@
 
         <ul class="uk-nav uk-nav-primary uk-nav-defaut uk-margin-auto-vertical">
           <center>
-            <img src="img/perfil.jpg" class="PerfilFoto">
-            <p class="PerfilNome">Nome do Usuário e Sobrenome</p>
+            <img src="../CarregarImagens.php?FotoPerfil" class="PerfilFoto">
+            <p class="PerfilNome"><?php echo $_SESSION['nome'] . " " . $_SESSION['sobrenome'] ?></p>
           </center>
           <li class="uk-active PerfilNome"></li>
-          <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: bell"></span> Notificações</a></li>
-          <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Meus Cursos</a></li>
-          <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: users"></span> Contato com ADM</a></li>
-          <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> Configurações</a></li>
+          <li><a href="Notificacoes.php"><span class="uk-margin-small-right" uk-icon="icon: bell"></span> Notificações</a></li>
+          <li><a href="MeusCursos.php"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Meus Cursos</a></li>
+          <li><a href="ADMContato.php"><span class="uk-margin-small-right" uk-icon="icon: users"></span> Contato com ADM</a></li>
+          <li><a href="Configuracoes.php"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> Configurações</a></li>
           <li class="uk-nav-divider"></li>
-          <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span> Sair</a></li>
+          <li><a href="../Sair.php"><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span> Sair</a></li>
         </ul>
 
       </div>
@@ -156,7 +142,7 @@
       <center>
         <img src="img/Logotipo.png" alt="">
       </center>
-      <p>Todos os direitos estão reservados ao © LIBRASON 2019</p>
+      <p>Todos os direitos estão reservados ao © LIBRASON 2018 - 2019</p>
       <p>Icones disponibilizados por <a class="uk-button-text" href="https://www.freepik.com/" title="Freepik">Freepik</a> de <a class="uk-button-text" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> licenciado por <a class="uk-button-text" href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></p>
     </div>
 
@@ -177,15 +163,165 @@
         </div>
         <div class="uk-modal-body">Se você recebeu essa mensagem ao se inscrever em algum curso e porque seus dados se encontram incompletos. Os dados iniciais de cadastro não são tudo que exigimos para as incrições em nossos cursos.</div>
         <div class="uk-modal-footer uk-text-right">
-          <button class="uk-button uk-button-secondary btn-color-secundario" type="Completar Cadastro">Completar Cadastro</button>
+          <form method="post" action="Configuracoes.php" style="display: inline-block">
+            <button class="uk-button uk-button-secondary btn-color-secundario" type="submit">Completar Cadastro</button>
+          </form>
           <button class="uk-button uk-button-primary uk-modal-close btn-color-primeiro" type="button">Fechar</button>
         </div>
       </div>
     </div>
 
+    <div id="modalRC" uk-modal>
+      <div class="uk-modal-dialog">
+
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+
+        <div class="uk-modal-header">
+            <h2 id="tituloRC" class="uk-modal-title">
+              Regulamento do curso
+            </h2>
+        </div>
+
+        <div id="bodyModalRC" class="uk-modal-body" uk-overflow-auto>
+
+        </div>
+
+        <div class="uk-modal-footer uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close btn-color-primeiro" type="button">OK, Eu Concordo</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="modalIncricoesOnline" uk-modal>
+      <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+          <h2 class="uk-modal-title">Inscrição no curso</h2>
+        </div>
+        <div class="uk-modal-body">
+          <p>Você está preste a se inscrever em um curso online, antes siga algumas instruções</p>
+          <ul class="uk-list uk-list-bullet">
+            <li>Leia o Regulamento </li>
+            <li>Confira se suas informações pessoais em <strong>configurações</strong> estão completas</li>
+            <li>Lembre-se que nem todo curso ofertado oferece um certificado, confira isso na pagina do curso</li>
+          </ul>
+        </div>
+        <div id="footerModalOnline" class="uk-modal-footer uk-text-right">
+          Houve algum erro
+        </div>
+      </div>
+    </div>
+
+    <div id="modalIncricoesPresencial" uk-modal>
+      <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+          <h2 class="uk-modal-title">Inscrição no curso</h2>
+        </div>
+        <div class="uk-modal-body">
+          <p>Você está preste a se inscrever em um curso online, antes siga algumas instruções</p>
+          <ul class="uk-list uk-list-bullet">
+            <li>Leia o Regulamento </li>
+            <li>Confira se suas informações pessoais em <strong>configurações</strong> estão completas</li>
+            <li>Os certificados de cursos presenciai são gerados pela instituição</li>
+            <li>O LibrasON atua como auxiliar nas aulas, para se cadastrar insira a chave de acesso, caso não tenha solicite ao professor do curso</li>
+          </ul>
+          <form method="post" action="../Inscricoes.php" class="uk-grid-small" uk-grid style="margin: 0 auto; width: 500px;">
+            <div class="uk-width-1-2@s">
+                <input name="codigoAcesso" class="uk-input" type="password" placeholder="Chave de acesso" style="border: 1px solid #3269c4;" required="">
+            </div>
+            <div id="footerModalPresencial" class="uk-width-1-2@s">
+                Inscrição Impossibilitada
+            </div>
+          </form>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+          <button class="uk-button uk-button-primary uk-modal-close btn-color-primeiro" type="button">Fechar</button>
+        </div>
+      </div>
+    </div>
+      
+    <div id="InscricaoFeita" uk-modal>
+      <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+          <h2 class="uk-modal-title">Inscrição no curso</h2>
+        </div>
+        <div class="uk-modal-body">
+            <?php 
+            if(isset($_GET['MSGINSCRICAO'])){
+                if($_GET['MSGINSCRICAO'] == 3){
+                     echo "Codigo de inscrição está incorreto, por favor tente novamente inserido a chave de acesso correta.";
+                }else if($_GET['MSGINSCRICAO'] == 4){
+                   echo "Não há vagas disponiveis neste curso, mas não fique triste, cursos são abertos mensalmente no LibrasON";
+       
+                }else if($_GET['MSGINSCRICAO'] == 5){
+                   echo "Você já se inscreveu nesse curso, por favor caso queira se inscrever em mais cursos, confira as opções com numero de inscrições restantes menor que um.";
+        
+                }else if($_GET['MSGINSCRICAO'] == 6){
+                   echo "A inscrição para esse curso não é feita por aqui, por favor caso insista em realizar esse tipo de ação, sua conta no LibrasON será excluída sem qualquer tipo de apelação";
+        
+                }else if($_GET['MSGINSCRICAO'] == 7){
+                   echo "Parabéns, sua inscrição foi realizada com sucesso, volte ao menu principal e acesse a área <strong>Meus Cursos</strong> para iniciar suas aulas";
+        
+                }else if($_GET['MSGINSCRICAO'] == 8){
+                   echo "Erro não identificado, caso tenha recebido essa mesagem faça contato com a administração pelo menu do usuário( Clikando no seu nome na barra de menu)";
+        
+                }
+            } 
+            ?>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+          <button class="uk-button uk-button-primary uk-modal-close btn-color-primeiro" type="button">Fechar</button>
+        </div>
+      </div>
+    </div>
+      
+    <?php if(isset($_GET['MSGINSCRICAO'])){ ?>
+      <script>
+        UIkit.modal("#InscricaoFeita").show();
+      </script>
+    <?php } ?>
+
     <script type="text/javascript">
-      UIkit.offcanvas(element, options);
+
+        function modalInscricaoOnline(idCurso){
+          document.getElementById("footerModalOnline").innerHTML = '<form method="post" action="../Inscricoes.php?inscreverCurso=' + idCurso +'" style="display: inline-block"><button class="uk-button uk-button-secondary btn-color-secundario" type="submit">Completar Inscrição</button></form><button class="uk-button uk-button-primary uk-modal-close btn-color-primeiro" style="margin-left: 5px" type="button">Fechar</button>';
+          UIkit.modal("#modalIncricoesOnline").show();
+        }
+
+        function modalInscricaoPresencial(idCurso){
+          document.getElementById("footerModalPresencial").innerHTML = '<button name="inscricaoPresencial" value="'+ idCurso +'" class="uk-button uk-button-secondary btn-color-secundario" type="submit">Completar Inscrição</button>';
+          UIkit.modal("#modalIncricoesPresencial").show();
+        }
+
+        function exibirRegulamento(idCurso){
+          var pagina = "../Inscricoes.php?gerarRegulamento=" + idCurso;
+          document.getElementById("tituloRC").innerHTML = "Regulamento do Curso";
+          loadDoc(pagina);
+          UIkit.modal("#modalRC").show();
+        }
+
+        function exibirCertificadoR(idCurso){
+          var pagina = "../Inscricoes.php?gerarCertificado=" + idCurso;
+          document.getElementById("tituloRC").innerHTML = "Certificado";
+          loadDoc(pagina);
+          UIkit.modal("#modalRC").show();
+        }
+
+        function loadDoc(pagina) {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+             document.getElementById("bodyModalRC").innerHTML = this.responseText;
+            }
+          };
+          xhttp.open("GET", pagina, true);
+          xhttp.send();
+        }
     </script>
+
     <script type="text/javascript" src="Materializer/js/materialize.min.js"></script>
   </body>
 </html>
