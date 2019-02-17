@@ -1,3 +1,22 @@
+<?php
+require_once '../loader.php';
+if(isset($_SESSION['logado'])){
+    if(!$_SESSION['logado']){
+        echo "<script>window.location.href = 'Inicio.php?ERRO=7'</script>";
+    }
+}else{
+    echo "<script>window.location.href = 'Inicio.php?ERRO=7'</script>";
+}
+$usuario = $_SESSION['usuario'];
+$idCurso = $_REQUEST['ID'];
+
+$Painel = new PainelCursos($idCurso, $usuario);
+
+if(!$Painel->verificarPermissao()){
+    echo "<script>window.location.href = 'MeusCursos.php?ERRO=7'</script>";
+}
+$Curso = $Painel->retornarInfCurso();
+?>
 <!DOCTYPE html>
 <html lang=pt-br dir="ltr">
   <head>
@@ -23,12 +42,16 @@
                   <a href="Home.php">  Início  </a>
               </li>
 
-              <li class="uk-active">
+              <li>
                   <a href="Cursos.php">  Cursos  </a>
+              </li>
+              
+              <li class="uk-active">
+                  <a href="MeusCursos.php">  Meus Cursos  </a>
               </li>
 
               <li>
-                  <a href="">  Comunidade  </a>
+                  <a href="Comunidades.php">  Comunidade  </a>
               </li>
 
               <li>
@@ -36,7 +59,7 @@
               </li>
 
               <li>
-                  <a href="#offcanvas-nav-primary" uk-toggle>  Nome do Usuário e Sobrenome  </a>
+                  <a href="#offcanvas-nav-primary" uk-toggle>  <?php echo $_SESSION['nome'] . " " . $_SESSION['sobrenome'] ?>  </a>
               </li>
 
           </ul>
@@ -51,71 +74,22 @@
           <div class="uk-card uk-card-default uk-card-body Tamanho-Home-PrimeiraArea Borda-Card sombraCaixa">
             <div class="uk-text-center" uk-grid>
               <div class="uk-width-expand@m">
-                <h3 class="uk-card-title TituloCard" style="margin-bottom: 0">Nome do Curso</h3>
-                <h5 class="TituloCard" style="margin-top: 0">Um curso oferecido por: Nome Oferecedor</h5>
+                <h3 class="uk-card-title TituloCard" style="margin-bottom: 0"><?php echo $Curso->Nome ?></h3>
+                <h5 class="TituloCard" style="margin-top: 0">Um curso oferecido por: <?php echo $Curso->Oferecedor ?></h5>
               </div>
             </div>
-
+              
             <table class="uk-table uk-table-hover uk-table-divider">
               <thead>
                 <tr>
                   <th>Proposta</th>
                   <th>Descrição</th>
                   <th>Data</th>
+                  <th>Link</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Table Data</td>
-                  <td>Table Data</td>
-                  <td>Table Data</td>
-                </tr>
-                <tr>
-                  <td>Table Data</td>
-                  <td>Table Data</td>
-                  <td>Table Data</td>
-                </tr>
-                <tr>
-                  <td>Table Data</td>
-                  <td>Table Data</td>
-                  <td>Table Data</td>
-                </tr>
-                <tr>
-                  <td>Table Data</td>
-                  <td>Table Data</td>
-                  <td>Table Data</td>
-                </tr>
-                <tr>
-                  <td>Table Data</td>
-                  <td>Table Data</td>
-                  <td>Table Data</td>
-                </tr>
-                <tr>
-                  <td>Table Data</td>
-                  <td>Table Data</td>
-                  <td>Table Data</td>
-                </tr>
-                <tr>
-                  <td>Table Data</td>
-                  <td>Table Data</td>
-                  <td>Table Data</td>
-                </tr>
-                <tr>
-                  <td>Table Data</td>
-                  <td>Table Data</td>
-                  <td>Table Data</td>
-                </tr>
-                <tr>
-                  <td>Table Data</td>
-                  <td>Table Data</td>
-                  <td>Table Data</td>
-                </tr>
-                <tr>
-                  <td>Table Data</td>
-                  <td>Table Data</td>
-                  <td>Table Data</td>
-                </tr>
-
+                  <?php  $Painel->exibirPropostas(); ?>
               </tbody>
             </table>
 
@@ -170,27 +144,28 @@
 
         <ul class="uk-nav uk-nav-primary uk-nav-defaut uk-margin-auto-vertical">
           <center>
-            <img src="img/perfil.jpg" class="PerfilFoto">
-            <p class="PerfilNome">Nome do Usuário e Sobrenome</p>
+            <img src="../CarregarImagens.php?FotoPerfil" class="PerfilFoto">
+            <p class="PerfilNome"><?php echo $_SESSION['nome'] . " " . $_SESSION['sobrenome'] ?></p>
           </center>
           <li class="uk-active PerfilNome"></li>
-          <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: bell"></span> Notificações</a></li>
-          <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Meus Cursos</a></li>
-          <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: users"></span> Contato com ADM</a></li>
-          <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> Configurações</a></li>
+          <li><a href="Notificacoes.php"><span class="uk-margin-small-right" uk-icon="icon: bell"></span> Notificações</a></li>
+          <li><a href="MeusCursos.php"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Meus Cursos</a></li>
+          <li><a href="ADMContato.php"><span class="uk-margin-small-right" uk-icon="icon: users"></span> Contato com ADM</a></li>
+          <li><a href="Configuracoes.php"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> Configurações</a></li>
           <li class="uk-nav-divider"></li>
-          <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span> Sair</a></li>
+          <li><a href="../Sair.php"><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span> Sair</a></li>
         </ul>
 
       </div>
     </div>
 
-    <div class="Rodape">
+    <div class="Rodape" style="height: 160px">
       <center>
         <img src="img/Logotipo.png" alt="">
       </center>
-      <p>Todos os direitos estão reservados ao © LIBRASON 2019</p>
+      <p>Todos os direitos estão reservados ao © LIBRASON 2018 - 2019</p>
       <p>Icones disponibilizados por <a class="uk-button-text" href="https://www.freepik.com/" title="Freepik">Freepik</a> de <a class="uk-button-text" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> licenciado por <a class="uk-button-text" href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></p>
+      <p>Icones disponibilizados por <a class="uk-button-text" href="https://www.flaticon.com/authors/smashicons" title="Freepik">Smashicons</a> de <a class="uk-button-text" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> licenciado por <a class="uk-button-text" href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></p>
     </div>
 
     <div class="Desenvolvedor">

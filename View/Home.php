@@ -36,13 +36,17 @@ if(isset($_SESSION['logado'])){
               <li>
                   <a href="Cursos.php">  Cursos  </a>
               </li>
-
+              
+              <li class="">
+                  <a href="MeusCursos.php">  Meus Cursos  </a>
+              </li>
+              
               <li>
-                  <a href="">  Comunidade  </a>
+                  <a href="Comunidades.php">  Comunidade  </a>
               </li>
 
               <li>
-                  <a href="">  Comunicados e Novidades  </a>
+                  <a href="Comunicados.php">  Comunicados e Novidades  </a>
               </li>
 
               <li>
@@ -107,7 +111,7 @@ if(isset($_SESSION['logado'])){
             <div class="uk-child-width-expand@s Cards-Funcoes" uk-grid>
 
               <div>
-                <a href="#" class="RemoverLinkEstiloPadrão">
+                <a href="Comunidades.php" class="RemoverLinkEstiloPadrão">
                   <div class="uk-card uk-card-default uk-card-body uk-card-hover  bordaPersonalizada">
                     <h3 class="uk-card-title CorTituloCard"><img src="img/Icones/IC3.png" alt="" width="30"> Comunidade</h3>
                     <p>Espaço destinado para comunicação entre nossos usuários sobre temas distintos, seja sobre a plataforma ou a comunidade</p>
@@ -116,7 +120,7 @@ if(isset($_SESSION['logado'])){
               </div>
 
               <div>
-                <a href="#" class="RemoverLinkEstiloPadrão">
+                <a href="Notificacoes.php" class="RemoverLinkEstiloPadrão">
                   <div class="uk-card uk-card-default uk-card-body uk-card-hover bordaPersonalizada">
                     <h3 class="uk-card-title CorTituloCard"><img src="img/Icones/IC5.png" alt="" width="30"> Notificações</h3>
                     <p>Acompanhe suas notificações sobre cursos, sua conta ou novidadades. Aqui você fica informado sobre o que há de novo no curso</p>
@@ -125,7 +129,7 @@ if(isset($_SESSION['logado'])){
               </div>
 
               <div>
-                <a href="#" class="RemoverLinkEstiloPadrão">
+                <a href="Configuracoes.php" class="RemoverLinkEstiloPadrão">
                   <div class="uk-card uk-card-default uk-card-body uk-card-hover bordaPersonalizada">
                     <h3 class="uk-card-title CorTituloCard"><img src="img/Icones/IC6.png" alt="" width="30"> Configurações</h3>
                     <p>Configure suas informações de usuário, foto de perfil, dados obrigatorios e sobre o encerramento da sua conta </p>
@@ -205,7 +209,7 @@ if(isset($_SESSION['logado'])){
       <center>
         <img src="img/Logotipo.png" alt="">
       </center>
-      <p>Todos os direitos estão reservados ao © LIBRASON 2019</p>
+      <p>Todos os direitos estão reservados ao © LIBRASON 2018 - 2019</p>
       <p>Icones disponibilizados por <a class="uk-button-text" href="https://www.freepik.com/" title="Freepik">Freepik</a> de <a class="uk-button-text" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> licenciado por <a class="uk-button-text" href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></p>
     </div>
 

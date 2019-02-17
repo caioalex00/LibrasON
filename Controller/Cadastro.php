@@ -6,7 +6,7 @@
  * @copyright (c) 10/02/2019, Caio Alexandre de Sousa Ramos
  * @author Caio Alexandre De Sousa Ramos
  * @email caioxandres2000@gmail.com
- * @version 2.0
+ * @version 2.0 - 10/02/2019
  * @métodos definirDados, definirFoto, validarDados, realizarRegistro, vereficarCadastroRealizado, 
  * verificarCompatibilidadeDeSenhas, criptografarSenha, verificarFormatacao, formatarNomeUsuario, 
  * verificarDisponiblidadeUsuario, registrarPerfil
@@ -43,6 +43,12 @@ class Cadastro {
      * @Descrição: Armazena os valores necessarios para o cadastro
      * @copyright (c) 10/02/2018, Caio Alexandre de Sousa Ramos
      * @versao 2.0 - 10/02/2019
+     * @param string $usuario armazena o nome de usuario a ser registrado
+     * @param string $nomeUsuario armazena o nome do usuario a ser registrado
+     * @param string $sobrenomeUsuario armazena o sobrenome do usuario a ser registrado
+     * @param string $senhaUsuario armazena a senha do usuario a ser registrado
+     * @param string $senhaRevisaoUsuario armazena a senha de revisão do usuário a ser registrado
+     * @param string $emailUsuario armazena o email do usuário a ser registrado
      */
     public function definirDados($usuario, $nomeUsuario, $sobrenomeUsuario, $senhaUsuario, $senhaRevisaoUsuario, $emailUsuario) {
         $this->usuario = $usuario;
@@ -57,6 +63,11 @@ class Cadastro {
      * @Descrição: Armazena os valores necessarios para o recorte e upload da foto para o banco
      * @copyright (c) 10/02/2018, Caio Alexandre de Sousa Ramos
      * @versao 2.0 - 10/02/2019
+     * @param string $foto armazena a foto de perfil enviada pelo usuário
+     * @param string $x armazena o eixo x do recorte de foto
+     * @param string $y armazena o eixo y do recorte de foto
+     * @param string $w armazena a lagura do recorte de foto
+     * @param string $h armazena a altura do recorte de foto
      */
     public function definirFoto($foto, $x, $y, $w, $h) {
         $this->foto = $foto;
@@ -70,6 +81,7 @@ class Cadastro {
      * @Descrição: valida dados inserido pelo usuário
      * @copyright (c) 10/02/2018, Caio Alexandre de Sousa Ramos
      * @versao 2.0 - 10/02/2019
+     * @parametros Sem parâmetros
      */
     public function validarDados(){
         if(empty($this->usuario) || empty($this->nomeUsuario) || empty($this->sobrenomeUsuario) || empty($this->senhaUsuario) || empty($this->emailUsuario)){
@@ -97,11 +109,13 @@ class Cadastro {
      * @Descrição: Realiza registro de usuário fazendo contato com a Model
      * @copyright (c) 10/02/2018, Caio Alexandre de Sousa Ramos
      * @versao 2.0 - 10/02/2019
+     * @parametros Sem parâmetros
      */
     public function realizarRegistro(){
-        $cadastro = new CadastroBD();
-        $cadastro->definirDados($this->usuario, $this->nomeUsuario, $this->sobrenomeUsuario, $this->senhaFinalUsuario, $this->emailUsuario);
-        $cadastro->inserirDados();
+        $colunas = "`idUsuario`, `Usuario`, `Email`, `Senha`, `Nome`, `Sobrenome`, `DataNascimento`";
+        $valores = "0|\|R" . $this->usuario . "|\|R" . $this->emailUsuario . "|\|R" . $this->senhaFinalUsuario . "|\|R" . $this->nomeUsuario . "|\|R" . $this->sobrenomeUsuario . "|\|R0";
+        $Create = new Create("Usuario", $colunas, $valores);
+        $Create->executarQuery();
         $this->registrarPerfil();
     }
     
@@ -109,10 +123,13 @@ class Cadastro {
      * @Descrição: Verefica se o o resgistro do usuário foi feito por meio de uma checagem
      * @copyright (c) 10/02/2018, Caio Alexandre de Sousa Ramos
      * @versao 2.0 - 10/02/2019
+     * @parametros Sem parâmetros
      */
     public function vereficarCadastroRealizado(){
-        $cadastro = new CadastroBD();
-        if(!$cadastro->vereficarUser($this->usuario)){
+        
+        $Read = new Reader("Usuario", "*", "Usuario", "$this->usuario");
+        $Read->executarQuery();
+        if($Read->getnumLinhas() == 1){
             return true;
         }else{
             return false;
@@ -123,6 +140,7 @@ class Cadastro {
      * @Descrição: Verefica se as senhas inseridas pelo usuário são compativeis
      * @copyright (c) 10/02/2018, Caio Alexandre de Sousa Ramos
      * @versao 2.0 - 10/02/2019
+     * @parametros Sem parâmetros
      */
     private function verificarCompatibilidadeDeSenhas(){
         if($this->senhaUsuario == $this->senhaRevisaoUsuario){
@@ -136,6 +154,7 @@ class Cadastro {
      * @Descrição: Faz uma criptografia da senha usando o hash sha1
      * @copyright (c) 10/02/2018, Caio Alexandre de Sousa Ramos
      * @versao 2.0 - 10/02/2019
+     * @parametros Sem parâmetros
      */
     private function criptografarSenha(){
         $this->senhaFinalUsuario = sha1($this->senhaUsuario);
@@ -145,6 +164,7 @@ class Cadastro {
      * @Descrição: verefica se o nome de usuário contém espaços
      * @copyright (c) 10/02/2018, Caio Alexandre de Sousa Ramos
      * @versao 2.0 - 10/02/2019
+     * @parametros Sem parâmetros
      */
     private function verificarFormatacao(){
          if( preg_match('/\s/', $this->usuario)){
@@ -158,6 +178,7 @@ class Cadastro {
      * @Descrição: Armazena novamente o nome de usuário, so que em letras minusculas
      * @copyright (c) 10/02/2018, Caio Alexandre de Sousa Ramos
      * @versao 2.0 - 10/02/2019
+     * @parametros Sem parâmetros
      */
     private function formatarNomeUsuario(){
         $this->usuario = strtolower($this->usuario);
@@ -167,10 +188,17 @@ class Cadastro {
      * @Descrição: Verifica se há um nome de usuario correpodente na base de dados
      * @copyright (c) 10/02/2018, Caio Alexandre de Sousa Ramos
      * @versao 2.0 - 10/02/2019
+     * @parametros Sem parâmetros
      */
     private function verificarDisponiblidadeUsuario(){
-        $verUser = new CadastroBD;
-        return $verUser->vereficarUser($this->usuario);
+        
+        $Read = new Reader("Usuario", "*", "Usuario", "$this->usuario");
+        $Read->executarQuery();
+        if($Read->getnumLinhas() == 0){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -178,6 +206,7 @@ class Cadastro {
      * contado com a Model
      * @copyright (c) 10/02/2018, Caio Alexandre de Sousa Ramos
      * @versao 2.0 - 10/02/2019
+     * @parametros Sem parâmetros
      */
     private function registrarPerfil(){
         
@@ -201,9 +230,14 @@ class Cadastro {
         
         unlink($src);
         
-        $perfil = new CadastroBD;
-        $idUsuario = $perfil ->obterID($this->usuario);
-        $perfil->registrarFotoDePerfil($idUsuario, $conteudoF);
+        $Read = new Reader("Usuario","idUsuario","Usuario","$this->usuario");
+        $Read->executarQuery();
+        $idUsuario = $Read->getResultado()[0]->idUsuario;
+        
+        $Colunas = "`idPerfil`,`Foto`,`FK_idUsuario`";
+        $Valores = "0|\|R" . $conteudoF . "|\|R" . $idUsuario;
+        $Create = new Create("Perfil", $Colunas, $Valores);
+        $Create->executarQuery();
     }
 
 }

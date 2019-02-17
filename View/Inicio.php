@@ -310,7 +310,7 @@ if(isset($_SESSION['logado'])){
                       <div class="file-field input-field">
                         <div class="btn btn-color-primeiro">
                           <span>Foto de Perfil</span>
-                          <input name="userFoto" type="file" class="btn-color-primeiro" required>
+                          <input name="userFoto" type="file" class="btn-color-primeiro"  accept="image/jpeg" required>
                         </div>
                         <div class="file-path-wrapper">
                           <input class="file-path validate" type="text">

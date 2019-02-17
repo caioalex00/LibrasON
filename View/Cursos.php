@@ -42,6 +42,10 @@ $cursos = new Curso($idCurso, $usuario);
               </li>
 
               <li>
+                  <a href="MeusCursos.php">  Meus Cursos  </a>
+              </li>
+              
+              <li>
                   <a href="Comunidades.php">  Comunidade  </a>
               </li>
 

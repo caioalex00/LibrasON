@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `LibrasON`.`Video` (
   `Proposta` VARCHAR(200) NOT NULL,
   `URL` TEXT NOT NULL,
   `Descricao` TEXT NOT NULL,
-  `DataCriacao` DATE NOT NULL,
+  `DataCriacao` DATETIME NOT NULL,
   `FK_idCurso` INT(11) NOT NULL,
   PRIMARY KEY (`idVideo`),
     FOREIGN KEY (`FK_idCurso`)
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `LibrasON`.`Documentacao` (
   `Proposta` VARCHAR(200) NOT NULL,
   `Descricao` TEXT NOT NULL,
   `NomeArquivo` VARCHAR(200) NOT NULL,
-  `DateCriacao` DATE NOT NULL,
+  `DataCriacao` DATETIME NOT NULL,
   `FK_idCurso` INT(11) NOT NULL,
   PRIMARY KEY (`idDocumentacao`),
     FOREIGN KEY (`FK_idCurso`)
@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `LibrasON`.`Tarefas` (
   `idTarefas` INT(11) NOT NULL AUTO_INCREMENT,
   `Proposta` VARCHAR(100) NOT NULL,
   `Descricao` TEXT NOT NULL,
-  `DataCriacao` DATE NOT NULL,
+  `DataCriacao` DATETIME NOT NULL,
   `FK_idCurso` INT(11) NOT NULL,
   PRIMARY KEY (`idTarefas`),
     FOREIGN KEY (`FK_idCurso`)
@@ -202,21 +202,6 @@ CREATE TABLE IF NOT EXISTS `LibrasON`.`Usuario_has_Curso` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
-
--- Função de vereficar vagas restantes
-
-DELIMITER $$
-
-CREATE FUNCTION verificarVagas (idCurso INT(11))
-RETURNS INTEGER
-BEGIN
-
-DECLARE retorno INT(11);
-
-SELECT count(FK_idCurso) INTO retorno FROM usuario_has_curso WHERE FK_idCurso = idCurso;
-
-RETURN retorno;
-END$$
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

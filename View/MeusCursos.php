@@ -1,3 +1,19 @@
+<?php
+require_once '../loader.php';
+if(isset($_SESSION['logado'])){
+    if(!$_SESSION['logado']){
+        echo "<script>window.location.href = 'Inicio.php?ERRO=7'</script>";
+    }
+}else{
+    echo "<script>window.location.href = 'Inicio.php?ERRO=7'</script>";
+}
+
+$usuario = $_SESSION['usuario'];
+$idCurso = null;
+
+$cursos = new Curso($idCurso, $usuario);
+
+?>
 <!DOCTYPE html>
 <html lang=pt-br dir="ltr">
   <head>
@@ -5,7 +21,6 @@
     <title>LibrasON - Aprendendo Libras na WEB</title>
     <link rel="icon" href="../favicon.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/uikit.min.css" />
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/uikit.min.js"></script>
@@ -23,20 +38,24 @@
                   <a href="Home.php">  Início  </a>
               </li>
 
-              <li class="uk-active">
+              <li class="">
                   <a href="Cursos.php">  Cursos  </a>
               </li>
-
-              <li>
-                  <a href="">  Comunidade  </a>
+              
+              <li class="uk-active">
+                  <a href="MeusCursos.php">  Meus Cursos  </a>
               </li>
 
               <li>
-                  <a href="">  Comunicados e Novidades  </a>
+                  <a href="Comunidades.php">  Comunidade  </a>
               </li>
 
               <li>
-                  <a href="#offcanvas-nav-primary" uk-toggle>  Nome do Usuário e Sobrenome  </a>
+                  <a href="Comunicados.php">  Comunicados e Novidades  </a>
+              </li>
+
+              <li>
+                  <a href="#offcanvas-nav-primary" uk-toggle>  <?php echo $_SESSION['nome'] . " " . $_SESSION['sobrenome'] ?>  </a>
               </li>
 
           </ul>
@@ -55,34 +74,9 @@
                 <h5 class="TituloCard" style="margin-top: 0">Todos os cursos que você se inscreveu</h5>
               </div>
             </div>
-
-            <div class="uk-child-width-expand@s Cards-Funcoes" uk-grid>
-            <div>
-                <div class="uk-card uk-card-default uk-card-body uk-card-hover bordaPersonalizada">
-                  <h3 class="uk-card-title CorTituloCard"><img src="img/Icones/IC1.png" alt="" width="30"> Introdução a Libras</h3>
-                  <p>Curso de Introdução a Língua Brasileira de Sinais, Aprenda sinais básicos como comprimentos, principais configurações da Libras, classificadores, datilologia e muito mais!</p>
-                  <p uk-margin>
-                    <form action="PainelUsuarioCurso.php" method="get">
-                      <button type="submit" class="uk-button uk-button-primary uk-button-small btn-color-primeiro">Entrar no curso</button>
-                    </form>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="uk-child-width-expand@s Cards-Funcoes" uk-grid>
-            <div>
-                <div class="uk-card uk-card-default uk-card-body uk-card-hover bordaPersonalizada">
-                  <h3 class="uk-card-title CorTituloCard"><img src="img/Icones/IC1.png" alt="" width="30"> Curso Básico de Libras: IFTO Campûs Araguaína</h3>
-                  <p>Curso de Introdução a Língua Brasileira de Sinais, Aprenda sinais básicos como comprimentos, principais configurações da Libras, classificadores, datilologia e muito mais!</p>
-                  <p uk-margin>
-                    <form action="PainelUsuarioCurso.php" method="get">
-                      <button type="submit" class="uk-button uk-button-primary uk-button-small btn-color-primeiro">Entrar no curso</button>
-                    </form>
-                  </p>
-                </div>
-              </div>
-            </div>
+               
+              <?php $cursos->exibirCursosCadastrados() ?>
+              
           </div>
         </div>
       </div>
@@ -134,16 +128,16 @@
 
         <ul class="uk-nav uk-nav-primary uk-nav-defaut uk-margin-auto-vertical">
           <center>
-            <img src="img/perfil.jpg" class="PerfilFoto">
-            <p class="PerfilNome">Nome do Usuário e Sobrenome</p>
+            <img src="../CarregarImagens.php?FotoPerfil" class="PerfilFoto">
+            <p class="PerfilNome"><?php echo $_SESSION['nome'] . " " . $_SESSION['sobrenome'] ?></p>
           </center>
           <li class="uk-active PerfilNome"></li>
-          <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: bell"></span> Notificações</a></li>
-          <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Meus Cursos</a></li>
-          <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: users"></span> Contato com ADM</a></li>
-          <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> Configurações</a></li>
+          <li><a href="Notificacoes.php"><span class="uk-margin-small-right" uk-icon="icon: bell"></span> Notificações</a></li>
+          <li><a href="MeusCursos.php"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Meus Cursos</a></li>
+          <li><a href="ADMContato.php"><span class="uk-margin-small-right" uk-icon="icon: users"></span> Contato com ADM</a></li>
+          <li><a href="Configuracoes.php"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> Configurações</a></li>
           <li class="uk-nav-divider"></li>
-          <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span> Sair</a></li>
+          <li><a href="../Sair.php"><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span> Sair</a></li>
         </ul>
 
       </div>
@@ -153,7 +147,7 @@
       <center>
         <img src="img/Logotipo.png" alt="">
       </center>
-      <p>Todos os direitos estão reservados ao © LIBRASON 2019</p>
+      <p>Todos os direitos estão reservados ao © LIBRASON 2018 - 2019</p>
       <p>Icones disponibilizados por <a class="uk-button-text" href="https://www.freepik.com/" title="Freepik">Freepik</a> de <a class="uk-button-text" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> licenciado por <a class="uk-button-text" href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></p>
     </div>
 
