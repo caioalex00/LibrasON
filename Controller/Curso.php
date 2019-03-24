@@ -87,9 +87,9 @@ class Curso {
     public function inscreverCurso(){
         $User = new Usuario();
         $idUsuario = $User->pesquisarID($this->usuario);
-        $valores = "0|\|R" . $idUsuario . "|\|R" . $this->idCurso;
+        $valores = $idUsuario . "|\|R" . $this->idCurso;
         
-        $Create = new Create("Usuario_has_Curso", "`Inscricao`, `FK_idUsuario`, `FK_idCurso`", $valores);
+        $Create = new Create("Usuario_has_Curso", "`FK_idUsuario`, `FK_idCurso`", $valores);
         $Create->executarQuery();
         
         return $User->verificarInscricaoUsuario($this->idCurso, $this->usuario);

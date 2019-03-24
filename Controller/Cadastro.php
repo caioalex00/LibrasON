@@ -112,8 +112,8 @@ class Cadastro {
      * @parametros Sem parâmetros
      */
     public function realizarRegistro(){
-        $colunas = "`idUsuario`, `Usuario`, `Email`, `Senha`, `Nome`, `Sobrenome`, `DataNascimento`";
-        $valores = "0|\|R" . $this->usuario . "|\|R" . $this->emailUsuario . "|\|R" . $this->senhaFinalUsuario . "|\|R" . $this->nomeUsuario . "|\|R" . $this->sobrenomeUsuario . "|\|R0";
+        $colunas = "`Usuario`, `Email`, `Senha`, `Nome`, `Sobrenome`";
+        $valores =$this->usuario . "|\|R" . $this->emailUsuario . "|\|R" . $this->senhaFinalUsuario . "|\|R" . $this->nomeUsuario . "|\|R" . $this->sobrenomeUsuario;
         $Create = new Create("Usuario", $colunas, $valores);
         $Create->executarQuery();
         $this->registrarPerfil();
@@ -234,8 +234,8 @@ class Cadastro {
         $Read->executarQuery();
         $idUsuario = $Read->getResultado()[0]->idUsuario;
         
-        $Colunas = "`idPerfil`,`Foto`,`FK_idUsuario`";
-        $Valores = "0|\|R" . $conteudoF . "|\|R" . $idUsuario;
+        $Colunas = "`Foto`,`FK_idUsuario`";
+        $Valores = $conteudoF . "|\|R" . $idUsuario;
         $Create = new Create("Perfil", $Colunas, $Valores);
         $Create->executarQuery();
     }

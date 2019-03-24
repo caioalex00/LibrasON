@@ -25,7 +25,7 @@ if(isset($_SESSION['logado'])){
   <body>
     <div>
       <div class="uk-navbar-container uk-margin borda-principal" style="margin: 0" uk-navbar>
-        <div class="uk-navbar-left">
+          <div class="uk-navbar-left" id="navbarWEB">
           <a class="uk-navbar-item uk-logo" href="Home.php"><img src="img/Logotipo.png" style="height: 60px"></a>
           <ul class="uk-navbar-nav">
 

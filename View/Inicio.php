@@ -73,7 +73,7 @@ if(isset($_SESSION['logado'])){
     </div>
 
     <!-- Apresentações -->
-    <div class="uk-height-large uk-background-cover uk-overflow-hidden uk-light uk-flex uk-flex-top" style="background-image: url('img/apresentacao1.png');">
+    <div class="uk-height-large uk-background-cover uk-overflow-hidden uk-light uk-flex uk-flex-top" style="background-image: url('img/Apresentacao1.png');">
         <div class="uk-text-center uk-margin-auto uk-margin-auto-vertical" style="width: 80%">
             <h1 class="Titulos"> NOSSOS OBJETIVOS</h1>
             <p>O Librason tem como objetivo apresentar ao usuário o surdo e sua língua. Para realizar tal ato é disponibilizado conteúdo sobre a cultura surda. A plataforma tambem conta com um AVA (Ambiente virtual de aprendizagem) para realizar a introdução a 2° língua oficial do Brasil: a LIBRAS (Língua brasileira de sinais) e incentivar que os usuários busquem se aprofundar na mesma. Como objetivo final, esperamos oportunizar a interação entre os ouvintes e a comunidade surda.</p>
@@ -244,7 +244,7 @@ if(isset($_SESSION['logado'])){
           <h2 class="uk-modal-title TituloModal">Entrar no <span style="color:#3269c4">LIBRAS</span><span style="color:#ff3229">ON</span></h2>
         </div>
         <div class="uk-modal-body">
-          <form method="post" action="../loginDeUsuario.php">
+          <form method="post" action="../LoginDeUsuario.php">
               <div>
                 <div class="input-field">
                   <i class="material-icons prefix">account_circle</i>

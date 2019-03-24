@@ -80,15 +80,38 @@ class PainelCursos {
         $dados = $read->getResultado();
         
         foreach ($dados as $proposta){
-            $data = $this->formatarData($proposta->DataCriacao);
-            $link = $this->processarTipoProposta($proposta->Proposta) . ".php?idCurso=" . $proposta->idCurso . "&?idProposta=" . $proposta->idProposta;
+            $conc = $this->verificarConclusao($proposta->Proposta, $proposta->idProposta);
+            $link = $this->processarTipoProposta($proposta->Proposta) . ".php?idCurso=" . $proposta->idCurso . "&idProposta=" . $proposta->idProposta;
             echo "<tr>";
             echo '<td><img src="img/Icones/ICOC_' . $this->processarTipoProposta($proposta->Proposta) . '.png"> <span style="color: #3269c4">' . $proposta->Proposta . '</span></td>';
             echo "<td>$proposta->Descricao</td>";
-            echo "<td>$data</td>";
+            echo "<td>$conc</td>";
             echo '<td><a href="' . $link .'">Acessar</td>';
             echo "</tr>";
         }
+    }
+    
+    /**
+     * @Descrição: retorna se o usuario completo aquela proposta do curso
+     * @copyright (c) 10/02/2018, Caio Alexandre de Sousa Ramos
+     * @versao 2.0 - 10/02/2019
+     * @param int $proposta armazena o tipo da proposta
+     * @param String $idProposta o id da proposta
+     */
+    private function verificarConclusao($proposta, $idProposta){
+        $tipo = $this->processarTipoProposta($proposta);
+        $tabela = "Usuario_has_" . $tipo;
+        $where  = "FK_id" . $tipo . "," . "FK_idUsuario";
+        $condicao = $idProposta . "," . $this->idUsuario;
+        $Read = new Reader($tabela, "*", $where, $condicao);
+        $Read->executarQuery();
+        
+        if($Read->getnumLinhas() == 1){
+            return '<span style="color: #01b400">Sim</span>';
+        }else{
+            return '<span style="color: #db0100">Não</span>';
+        }
+        
     }
     
     /**
@@ -103,7 +126,7 @@ class PainelCursos {
         if($verificao[0] == "Vídeo"){
             return "Video";
         }else if($verificao[0] == "Tarefa"){
-            return "Tarefa";
+            return "Tarefas";
         }else if($verificao[0] == "Documentação"){
             return "Documentacao";
         }

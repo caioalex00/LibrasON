@@ -1,17 +1,5 @@
--- MySQL Workbench Synchronization
--- Generated: 2019-02-08 14:17
--- Model: New Model
--- Version: 1.0
--- Project: Name of the project
--- Author: Caio Alexandre
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-
-CREATE SCHEMA IF NOT EXISTS `LibrasON` DEFAULT CHARACTER SET utf8 ;
-
-CREATE TABLE IF NOT EXISTS `LibrasON`.`Usuario` (
+CREATE TABLE IF NOT EXISTS `Usuario` (
   `idUsuario` INT(11) NOT NULL AUTO_INCREMENT,
   `Usuario` VARCHAR(30) NOT NULL,
   `Email` VARCHAR(100) NOT NULL,
@@ -23,17 +11,17 @@ CREATE TABLE IF NOT EXISTS `LibrasON`.`Usuario` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `LibrasON`.`Perfil` (
+CREATE TABLE IF NOT EXISTS `Perfil` (
   `idPerfil` INT(11) NOT NULL AUTO_INCREMENT,
   `Foto` BLOB NOT NULL,
   `FK_idUsuario` INT(11) NOT NULL,
   PRIMARY KEY (`idPerfil`),
 	FOREIGN KEY (`FK_idUsuario`)
-	REFERENCES `LibrasON`.`Usuario` (`idUsuario`))
+	REFERENCES `Usuario` (`idUsuario`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `LibrasON`.`Curso` (
+CREATE TABLE IF NOT EXISTS `Curso` (
   `idCurso` INT(11) NOT NULL AUTO_INCREMENT,
   `Nome` VARCHAR(80) NOT NULL,
   `Descricao` TEXT NOT NULL,
@@ -44,32 +32,32 @@ CREATE TABLE IF NOT EXISTS `LibrasON`.`Curso` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `librason`.`Codigo_Geral_Inscricao` (
+CREATE TABLE IF NOT EXISTS `Codigo_Geral_Inscricao` (
   `idCodigo_Geral_Inscricao` INT(11) NOT NULL AUTO_INCREMENT,
   `Codigo` VARCHAR(45) NOT NULL,
   `FK_idCurso` INT(11) NOT NULL,
   PRIMARY KEY (`idCodigo_Geral_Inscricao`),
     FOREIGN KEY (`FK_idCurso`)
-    REFERENCES `librason`.`curso` (`idCurso`)
+    REFERENCES `Curso` (`idCurso`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `librason`.`Informacoes` (
+CREATE TABLE IF NOT EXISTS `Informacoes` (
   `idInformacoes` INT(11) NOT NULL AUTO_INCREMENT,
   `Regulamento` TEXT NOT NULL,
   `Certificacao` TEXT NOT NULL,
   `FK_idCurso` INT(11) NOT NULL,
   PRIMARY KEY (`idInformacoes`),
     FOREIGN KEY (`FK_idCurso`)
-    REFERENCES `librason`.`curso` (`idCurso`)
+    REFERENCES `Curso` (`idCurso`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `LibrasON`.`Notificacoes` (
+CREATE TABLE IF NOT EXISTS `Notificacoes` (
   `idNotificacoes` INT(11) NOT NULL AUTO_INCREMENT,
   `Texto` TEXT NOT NULL,
   `Oferecedor` VARCHAR(80) NOT NULL,
@@ -78,13 +66,13 @@ CREATE TABLE IF NOT EXISTS `LibrasON`.`Notificacoes` (
   `FK_idUsuario` INT(11) NOT NULL,
   PRIMARY KEY (`idNotificacoes`),
     FOREIGN KEY (`FK_idUsuario`)
-    REFERENCES `LibrasON`.`Usuario` (`idUsuario`)
+    REFERENCES `Usuario` (`idUsuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `LibrasON`.`Notificacoes_Gerais` (
+CREATE TABLE IF NOT EXISTS `Notificacoes_Gerais` (
   `idNotificacoes_Gerais` INT(11) NOT NULL AUTO_INCREMENT,
   `Texto` TEXT NOT NULL,
   `DataCriacao` DATETIME NULL DEFAULT NULL,
@@ -92,22 +80,23 @@ CREATE TABLE IF NOT EXISTS `LibrasON`.`Notificacoes_Gerais` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `LibrasON`.`Video` (
+CREATE TABLE IF NOT EXISTS `Video` (
   `idVideo` INT(11) NOT NULL AUTO_INCREMENT,
   `Proposta` VARCHAR(200) NOT NULL,
   `URL` TEXT NOT NULL,
   `Descricao` TEXT NOT NULL,
+  `Tempo` INT(11) NOT NULL,
   `DataCriacao` DATETIME NOT NULL,
   `FK_idCurso` INT(11) NOT NULL,
   PRIMARY KEY (`idVideo`),
     FOREIGN KEY (`FK_idCurso`)
-    REFERENCES `LibrasON`.`Curso` (`idCurso`)
+    REFERENCES `Curso` (`idCurso`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `LibrasON`.`Documentacao` (
+CREATE TABLE IF NOT EXISTS `Documentacao` (
   `idDocumentacao` INT(11) NOT NULL AUTO_INCREMENT,
   `Proposta` VARCHAR(200) NOT NULL,
   `Descricao` TEXT NOT NULL,
@@ -116,13 +105,13 @@ CREATE TABLE IF NOT EXISTS `LibrasON`.`Documentacao` (
   `FK_idCurso` INT(11) NOT NULL,
   PRIMARY KEY (`idDocumentacao`),
     FOREIGN KEY (`FK_idCurso`)
-    REFERENCES `LibrasON`.`Curso` (`idCurso`)
+    REFERENCES `Curso` (`idCurso`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `LibrasON`.`Tarefas` (
+CREATE TABLE IF NOT EXISTS `Tarefas` (
   `idTarefas` INT(11) NOT NULL AUTO_INCREMENT,
   `Proposta` VARCHAR(100) NOT NULL,
   `Descricao` TEXT NOT NULL,
@@ -130,13 +119,13 @@ CREATE TABLE IF NOT EXISTS `LibrasON`.`Tarefas` (
   `FK_idCurso` INT(11) NOT NULL,
   PRIMARY KEY (`idTarefas`),
     FOREIGN KEY (`FK_idCurso`)
-    REFERENCES `LibrasON`.`Curso` (`idCurso`)
+    REFERENCES `Curso` (`idCurso`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `LibrasON`.`QuestoesFechadas` (
+CREATE TABLE IF NOT EXISTS `QuestoesFechadas` (
   `idQuestoesFechadas` INT(11) NOT NULL AUTO_INCREMENT,
   `Questao` TEXT NOT NULL,
   `Resposta` TEXT NOT NULL,
@@ -144,50 +133,50 @@ CREATE TABLE IF NOT EXISTS `LibrasON`.`QuestoesFechadas` (
   `FK_idTarefas` INT(11) NOT NULL,
   PRIMARY KEY (`idQuestoesFechadas`),
     FOREIGN KEY (`FK_idTarefas`)
-    REFERENCES `LibrasON`.`Tarefas` (`idTarefas`)
+    REFERENCES `Tarefas` (`idTarefas`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `LibrasON`.`Alternativa` (
+CREATE TABLE IF NOT EXISTS `Alternativa` (
   `idAlternativa` INT(11) NOT NULL AUTO_INCREMENT,
   `Texto` TEXT NOT NULL,
   `FK_idQuestoes` INT(11) NOT NULL,
   PRIMARY KEY (`idAlternativa`),
     FOREIGN KEY (`FK_idQuestoes`)
-    REFERENCES `LibrasON`.`QuestoesFechadas` (`idQuestoesFechadas`)
+    REFERENCES `QuestoesFechadas` (`idQuestoesFechadas`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `LibrasON`.`Comunidade` (
+CREATE TABLE IF NOT EXISTS `Comunidade` (
   `idComunidade` INT(11) NOT NULL AUTO_INCREMENT,
   `Topico` TEXT NOT NULL,
   `FK_idUsuario` INT(11) NOT NULL,
   PRIMARY KEY (`idComunidade`),
     FOREIGN KEY (`FK_idUsuario`)
-    REFERENCES `LibrasON`.`Usuario` (`idUsuario`)
+    REFERENCES `Usuario` (`idUsuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `LibrasON`.`MensagemDiscusao` (
+CREATE TABLE IF NOT EXISTS `MensagemDiscusao` (
   `idMensagemDiscusao` INT(11) NOT NULL AUTO_INCREMENT,
   `Mensagem` TEXT NOT NULL,
   `Data` DATETIME NOT NULL,
   `FK_idComunidade` INT(11) NOT NULL,
   PRIMARY KEY (`idMensagemDiscusao`),
     FOREIGN KEY (`FK_idComunidade`)
-    REFERENCES `LibrasON`.`Comunidade` (`idComunidade`)
+    REFERENCES `Comunidade` (`idComunidade`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `LibrasON`.`Usuario_has_Curso` (
+CREATE TABLE IF NOT EXISTS `Usuario_has_Curso` (
   `Inscricao` INT(11) NOT NULL AUTO_INCREMENT,
   `FK_idUsuario` INT(11) NOT NULL,
   `FK_idCurso` INT(11) NOT NULL,
@@ -197,12 +186,53 @@ CREATE TABLE IF NOT EXISTS `LibrasON`.`Usuario_has_Curso` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     FOREIGN KEY (`FK_idCurso`)
-    REFERENCES `LibrasON`.`Curso` (`idCurso`)
+    REFERENCES `Curso` (`idCurso`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+CREATE TABLE IF NOT EXISTS `Usuario_has_Documentacao` (
+  `FK_idUsuario` INT(11) NOT NULL,
+  `FK_idDocumentacao` INT(11) NOT NULL,
+  PRIMARY KEY (`FK_idUsuario`, `FK_idDocumentacao`),
+    FOREIGN KEY (`FK_idUsuario`)
+    REFERENCES `Usuario` (`idUsuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    FOREIGN KEY (`FK_idDocumentacao`)
+    REFERENCES `Documentacao` (`idDocumentacao`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `Usuario_has_Tarefas` (
+  `FK_idTarefas` INT(11) NOT NULL,
+  `FK_idUsuario` INT(11) NOT NULL,
+  PRIMARY KEY (`FK_idTarefas`, `FK_idUsuario`),
+    FOREIGN KEY (`FK_idTarefas`)
+    REFERENCES `Tarefas` (`idTarefas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    FOREIGN KEY (`FK_idUsuario`)
+    REFERENCES `Usuario` (`idUsuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `Usuario_has_Video` (
+  `FK_idUsuario` INT(11) NOT NULL,
+  `FK_idVideo` INT(11) NOT NULL,
+  PRIMARY KEY (`FK_idUsuario`, `FK_idVideo`),
+    FOREIGN KEY (`FK_idUsuario`)
+    REFERENCES `Usuario` (`idUsuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    FOREIGN KEY (`FK_idVideo`)
+    REFERENCES `Video` (`idVideo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;

@@ -84,7 +84,7 @@ $Curso = $Painel->retornarInfCurso();
                 <tr>
                   <th>Proposta</th>
                   <th>Descrição</th>
-                  <th>Data</th>
+                  <th>Concluído</th>
                   <th>Link</th>
                 </tr>
               </thead>
