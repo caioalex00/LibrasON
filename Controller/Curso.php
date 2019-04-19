@@ -207,7 +207,7 @@ class Curso {
         foreach ($Cursos as $dado){
             ?>
             <div class="Cards-Funcoes" uk-grid>
-            <div>
+                <div style="">
                 <div class="uk-card uk-card-default uk-card-body uk-card-hover bordaPersonalizada">
                     <h3 class="uk-card-title CorTituloCard"><img src="img/Icones/IC1.png" alt="" width="30"> <span style="margin-right: 10px;"><?php echo $dado->Nome  ?></span><?php $this->exibirLabels($dado->idCurso, $dado->Inscricoes, $dado->Tipo) ?></h3>
                   <p><?php echo $dado->Descricao?></p>

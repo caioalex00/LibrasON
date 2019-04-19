@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/LibrasON/Controller/PainelCursos.php</file>
-            <file>file:/C:/xampp/htdocs/LibrasON/View/Video.php</file>
-            <file>file:/C:/xampp/htdocs/LibrasON/Controller/Video.php</file>
+            <file>file:/C:/xampp/htdocs/LibrasON/View/Inicio.php</file>
+            <file>file:/C:/xampp/htdocs/LibrasON/View/Cursos.php</file>
+            <file>file:/C:/xampp/htdocs/LibrasON/View/MeusCursos.php</file>
+            <file>file:/C:/xampp/htdocs/LibrasON/View/Home.php</file>
+            <file>file:/C:/xampp/htdocs/LibrasON/View/css/style.css</file>
         </group>
     </open-files>
 </project-private>

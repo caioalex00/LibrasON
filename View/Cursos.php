@@ -16,55 +16,61 @@ $cursos = new Curso($idCurso, $usuario);
 ?>
 <!DOCTYPE html>
 <html lang=pt-br dir="ltr" style="font-size: 15px; ">
-  <head>
-    <meta charset="utf-8">
-    <title>LibrasON - Aprendendo Libras na WEB</title>
-    <link rel="icon" href="../favicon.ico" type="image/x-icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/uikit.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <script src="js/uikit.min.js"></script>
-    <script src="js/uikit-icons.min.js"></script>
-  </head>
-  <body>
-    <div>
-      <div class="uk-navbar-container uk-margin borda-principal" style="margin: 0" uk-navbar>
-        <div class="uk-navbar-left">
-          <a class="uk-navbar-item uk-logo" href="Home.php"><img src="img/Logotipo.png" style="height: 60px"></a>
-          <ul class="uk-navbar-nav">
+    <head>
+        <meta charset="utf-8">
+        <title>LibrasON - Aprendendo Libras na WEB</title>
+        <link rel="icon" href="../favicon.ico" type="image/x-icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/uikit.min.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <script src="js/uikit.min.js"></script>
+        <script src="js/uikit-icons.min.js"></script>
+    </head>
+    <body>
+        <div>
+            <div class="uk-navbar-container uk-margin borda-principal" style="margin: 0" uk-navbar>
+                <div class="uk-navbar-left">
+                    <a class="uk-navbar-item uk-logo" href="Home.php"><img src="img/Logotipo.png" style="height: 60px"></a>
+                    <ul class="uk-navbar-nav display-none">
 
-              <li>
-                  <a href="Home.php">  Início  </a>
-              </li>
+                        <li>
+                            <a href="Home.php">  Início  </a>
+                        </li>
 
-              <li class="uk-active">
-                  <a href="Cursos.php">  Cursos  </a>
-              </li>
+                        <li class="uk-active">
+                            <a href="Cursos.php">  Cursos  </a>
+                        </li>
 
-              <li>
-                  <a href="MeusCursos.php">  Meus Cursos  </a>
-              </li>
-              
-              <li>
-                  <a href="Comunidades.php">  Comunidade  </a>
-              </li>
+                        <li>
+                            <a href="MeusCursos.php">  Meus Cursos  </a>
+                        </li>
 
-              <li>
-                  <a href="Comunicados.php">  Comunicados e Novidades  </a>
-              </li>
+                        <li>
+                            <a href="Comunidades.php">  Comunidade  </a>
+                        </li>
 
-              <li>
-                  <a href="#offcanvas-nav-primary" uk-toggle>  <?php echo $_SESSION['nome'] . " " . $_SESSION['sobrenome'] ?>  </a>
-              </li>
+                        <li>
+                            <a href="Comunicados.php">  Comunicados e Novidades  </a>
+                        </li>
 
-          </ul>
+                        <li>
+                            <a href="#offcanvas-nav-primary" uk-toggle>  <?php echo $_SESSION['nome'] ?>  </a>
+                        </li>
+
+                    </ul>
+                </div>
+                
+                <div class="uk-navbar-right">
+                    <ul class="uk-navbar-nav" id="navbarMobile">
+                        <a class="uk-navbar-toggle" uk-navbar-toggle-icon uk-toggle="target: #offcanvas-push"></a>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
     <div class="Home">
 
-      <div uk-grid class="Container-Home2">
+      <div class="Container-Home2">
         <div class="uk-width-expand@m Tamanho-Home-PrimeiraArea">
           <div class="uk-card uk-card-default uk-card-body Tamanho-Home-PrimeiraArea Borda-Card sombraCaixa">
             <div class="uk-text-center" uk-grid>
@@ -81,7 +87,7 @@ $cursos = new Curso($idCurso, $usuario);
       </div>
 
       <div uk-grid class="Container-Home" style="margin-top: 0px;">
-        <div class="uk-width-expand@m Tamanho-Home-PrimeiraArea">
+        <div class="uk-width-expand@m Tamanho-Home-PrimeiraArea" style="padding-left: 0">
           <div class="uk-card uk-card-default uk-card-body Tamanho-Home-PrimeiraArea Borda-Card sombraCaixa" style="overflow: scroll;">
             <h3 class="uk-card-title TituloCard">Lista de Tarefas</h3>
             <dl class="uk-description-list">
@@ -96,7 +102,8 @@ $cursos = new Curso($idCurso, $usuario);
             </dl>
           </div>
         </div>
-        <div class="uk-width-1-3@m Tamanho-Home-PrimeiraArea">
+          
+        <div class="uk-width-1-3@m Tamanho-Home-PrimeiraArea display-none">
           <div class="uk-card uk-card-default uk-card-body Tamanho-Home-PrimeiraArea Borda-Card sombraCaixa">
             <h3 class="uk-card-title TituloCard">Última Notificação</h3>
             <div class="uk-card-header">
@@ -224,21 +231,24 @@ $cursos = new Curso($idCurso, $usuario);
           <h2 class="uk-modal-title">Inscrição no curso</h2>
         </div>
         <div class="uk-modal-body">
-          <p>Você está preste a se inscrever em um curso online, antes siga algumas instruções</p>
+          <p>Você está preste a se inscrever em um curso presencial, antes siga algumas instruções</p>
           <ul class="uk-list uk-list-bullet">
             <li>Leia o Regulamento </li>
             <li>Confira se suas informações pessoais em <strong>configurações</strong> estão completas</li>
             <li>Os certificados de cursos presenciai são gerados pela instituição</li>
             <li>O LibrasON atua como auxiliar nas aulas, para se cadastrar insira a chave de acesso, caso não tenha solicite ao professor do curso</li>
+            
+            <form method="post" action="../Inscricoes.php" class="uk-grid-small formadpt" uk-grid style="margin: 10px auto">
+                <div class="formadptlep" style="width: 40%;">
+                  <input name="codigoAcesso" class="uk-input" type="password" placeholder="Chave de acesso" style="border: 1px solid #3269c4;" required="">
+              </div>
+              <div id="footerModalPresencial" class="uk-width-1-2@s">
+                  Inscrição Impossibilitada
+              </div>
+            </form>
+            
           </ul>
-          <form method="post" action="../Inscricoes.php" class="uk-grid-small" uk-grid style="margin: 0 auto; width: 500px;">
-            <div class="uk-width-1-2@s">
-                <input name="codigoAcesso" class="uk-input" type="password" placeholder="Chave de acesso" style="border: 1px solid #3269c4;" required="">
-            </div>
-            <div id="footerModalPresencial" class="uk-width-1-2@s">
-                Inscrição Impossibilitada
-            </div>
-          </form>
+          
         </div>
         <div class="uk-modal-footer uk-text-right">
           <button class="uk-button uk-button-primary uk-modal-close btn-color-primeiro" type="button">Fechar</button>
@@ -281,6 +291,32 @@ $cursos = new Curso($idCurso, $usuario);
         </div>
       </div>
     </div>
+        
+        <!-- Menu Mobile -->
+        <div id="offcanvas-push" uk-offcanvas="mode: push; overlay: true">
+            <div class="uk-offcanvas-bar">
+                <ul class="uk-nav uk-nav-default">
+                    <center>
+                        <img src="../CarregarImagens.php?FotoPerfil" class="PerfilFoto">
+                        <p class="PerfilNome"><?php echo $_SESSION['nome'] . " " . $_SESSION['sobrenome'] ?></p>
+                    </center>
+                    <li class="uk-nav-header">Menu Principal</li>
+                    <li class="uk-nav-divider"></li>
+                    <li><a href="Home.php"><span class="uk-margin-small-right" uk-icon="icon: home"></span>Início</a></li>
+                    <li class="uk-active"><a href="Cursos.php"><span class="uk-margin-small-right" uk-icon="icon: grid"></span> Cursos</a></li>
+                    <li><a href="MeusCursos.php"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Meus Cursos</a></li>
+                    <li><a href="Comunidades.php"><span class="uk-margin-small-right" uk-icon="icon: users"></span> Comunidade</a></li>
+                    <li><a href="Comunicados.php"><span class="uk-margin-small-right" uk-icon="icon: comments"></span> Comunicados</a></li>
+                    <li class="uk-nav-header">Opções do Usuário</li>
+                    <li class="uk-nav-divider"></li>
+                    <li><a href="Notificacoes.php"><span class="uk-margin-small-right" uk-icon="icon: bell"></span> Notificações</a></li>
+                    <li><a href="ADMContato.php"><span class="uk-margin-small-right" uk-icon="icon: user"></span> Contato com ADM</a></li>
+                    <li><a href="Configuracoes.php"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> Configurações</a></li>
+                    <li><a href="../Sair.php"><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span> Sair</a></li>
+                    <li class="uk-nav-divider"></li>
+                </ul>
+            </div>
+        </div>
       
     <?php if(isset($_GET['MSGINSCRICAO'])){ ?>
       <script>

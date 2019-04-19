@@ -180,16 +180,13 @@ a:hover{
   font-family: 'Prompt', sans-serif;
 }
 
-.PerfilMenu{
-  background: url(../img/FundoMenu.png);
-}
-
 .Home{
   background: url(../img/Fundo.png);
 }
 
 .Container-Home{
   width: 90%;
+  max-width: 1200px;
   margin: 0 auto;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -198,6 +195,7 @@ a:hover{
 
 .Container-Home2{
   width: 90%;
+  max-width: 1200px;
   margin: 0 auto;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -255,7 +253,7 @@ box-shadow: 0px 6px 17px 0px rgba(0,0,0,0.75);
 }
 
 .pre-conteiner-video{
-   width: 70%; 
+   width: 100%; 
    margin: 20px auto;
 }
 
@@ -272,4 +270,96 @@ box-shadow: 0px 6px 17px 0px rgba(0,0,0,0.75);
    left: 0px;
    width: 100%;
    height: 100%;
+}
+
+.uk-notification-message{
+    background: #222 !important;
+}
+
+@media screen and (max-width: 810px) {
+    #navbarWEB{
+        display: none;
+    }
+    #navbarMobile{
+        display: initial;
+    }
+    #carrosel{
+        display: none;
+    }
+    .logoPrincipal{
+        width: 150px;
+    }
+    #cadastro-web{
+        display: none
+    }
+    #cadastro-mobile{
+        display: block;
+    }
+    .Chamada{
+        font-size: 20px;
+    }
+    .InformacoesTelaPrincipal{
+        min-height: 30px;
+        height: auto !important;
+        padding: 20px 10px
+    }
+    .InformacoesTelaPrincipal button{
+        line-height: 20px;
+        padding: 10px;
+    }
+    #apresentacao-web{
+        display: none;
+    }
+    #slider-mobile{
+        display: none;
+    }
+    .display-none{
+        display: none;
+    }
+    .Desenvolvedor, .Rodape{
+        height: auto !important;
+        padding: 10px;
+    }
+    .PerfilFoto{
+        width: 100px;
+        height: 100px;
+        border-radius: 100%;
+    }
+    
+    .atalhos-mobile-adapt{
+        display: none;
+    }
+    
+    .formadpt{
+        width: 100%;
+    }
+    
+    .formadptlep{
+        width: 60% !important;
+    }
+    
+}
+
+@media screen and (min-width: 810px) {
+    #navbarMobile{
+        display: none;
+    }
+    #cadastro-mobile{
+        display: none;
+    }
+    .apresentacao-mobile-d{
+        display: none;
+    }
+    
+    .card-mobile-adpt{
+        display: none;
+    }
+    
+    .formadpt{
+        width: 500px;
+    }
+    
+    .mobile{
+        display: none;
+    }
 }

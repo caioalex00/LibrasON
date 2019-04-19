@@ -21,6 +21,9 @@ if(!$Painel->verificarPermissao()){
 $Curso = $Painel->retornarInfCurso();
 $Informacoes = $Video->buscarInformacoes();
 
+$date = new DateTime($Informacoes->DataCriacao);
+$DataD = date_format($date, 'd-m-Y');
+$DataH = date_format($date, 'H:i:s');
 ?>
 <!DOCTYPE html>
 <html lang=pt-br dir="ltr">
@@ -41,7 +44,7 @@ $Informacoes = $Video->buscarInformacoes();
             <div class="uk-navbar-container uk-margin borda-principal" style="margin: 0" uk-navbar>
                 <div class="uk-navbar-left">
                     <a class="uk-navbar-item uk-logo" href="Home.php"><img src="img/Logotipo.png" style="height: 60px"></a>
-                    <ul class="uk-navbar-nav">
+                    <ul class="uk-navbar-nav display-none">
 
                         <li>
                             <a href="Home.php">  Início  </a>
@@ -64,9 +67,14 @@ $Informacoes = $Video->buscarInformacoes();
                         </li>
 
                         <li>
-                            <a href="#offcanvas-nav-primary" uk-toggle>  <?php echo $_SESSION['nome'] . " " . $_SESSION['sobrenome'] ?>  </a>
+                            <a href="#offcanvas-nav-primary" uk-toggle>  <?php echo $_SESSION['nome']; ?>  </a>
                         </li>
 
+                    </ul>
+                </div>
+                <div class="uk-navbar-right">
+                    <ul class="uk-navbar-nav" id="navbarMobile">
+                        <a class="uk-navbar-toggle" uk-navbar-toggle-icon uk-toggle="target: #offcanvas-push"></a>
                     </ul>
                 </div>
             </div>
@@ -74,7 +82,7 @@ $Informacoes = $Video->buscarInformacoes();
 
         <div class="Home">
 
-            <div uk-grid class="Container-Home2">
+            <div class="Container-Home2">
                 <div class="uk-width-expand@m Tamanho-Home-PrimeiraArea">
                     
                     <div class="uk-card uk-card-default uk-card-body Tamanho-Home-PrimeiraArea Borda-Card sombraCaixa">
@@ -89,14 +97,14 @@ $Informacoes = $Video->buscarInformacoes();
 
                         <div class="pre-conteiner-video">
                             <div class="conteiner-video-l">
-                                <iframe class="video" src="<?php echo $Informacoes->URL ?>"></iframe>
+                                <iframe class="video" src="<?php echo $Informacoes->URL ?>"  frameborder="0" allow="autoplay; encrypted-media;" allowfullscreen></iframe>
                             </div>
                         </div>
 
                         <hr class="uk-divider-icon">
 
                         <article class="uk-article" style="width: 80%; margin: 20px auto;">
-                            <p class="uk-article-meta">Escrito por LibrasON | Vídeo disponivel desde 12 April 2012.
+                            <p class="uk-article-meta">Escrito por LibrasON | Vídeo disponivel desde <?php echo $DataD . " e " . $DataH?>.
                             <p class="uk-text-lead">Algumas coisas sobre os vídeos dos cursos</p>
                             <p style="text-align: justify">As páginas de vídeo se comportam de forma diferente das outras propostas de cursos. Elas verificam de instante em instante se você está realmente assistindo os vídeos e processará se você assistiu vídeo por completo caso você realmente assista ele. Para evitar qualquer tipo de mal entendido, assista um vídeo do curso so se for o assitir por completo, evite pausar. Boa Aula! </p>
                             <p style="text-align: justify; color: red">Para um melhor aproveitamento, é necessario que haja uma conexão estável e boa com a internete </p>
@@ -112,7 +120,7 @@ $Informacoes = $Video->buscarInformacoes();
             </div>
 
             <div uk-grid class="Container-Home" style="margin-top: 0px;">
-                <div class="uk-width-expand@m Tamanho-Home-PrimeiraArea">
+                <div class="uk-width-expand@m Tamanho-Home-PrimeiraArea" style="padding-left: 0">
                     <div class="uk-card uk-card-default uk-card-body Tamanho-Home-PrimeiraArea Borda-Card sombraCaixa" style="overflow: scroll;">
                         <h3 class="uk-card-title TituloCard">Lista de Tarefas</h3>
                         <dl class="uk-description-list">
@@ -128,7 +136,7 @@ $Informacoes = $Video->buscarInformacoes();
                     </div>
                 </div>
                 
-                <div class="uk-width-1-3@m Tamanho-Home-PrimeiraArea">
+                <div class="uk-width-1-3@m Tamanho-Home-PrimeiraArea display-none">
                     <div class="uk-card uk-card-default uk-card-body Tamanho-Home-PrimeiraArea Borda-Card sombraCaixa">
                         <h3 class="uk-card-title TituloCard">Última Notificação</h3>
                         <div class="uk-card-header">
@@ -191,18 +199,30 @@ $Informacoes = $Video->buscarInformacoes();
             <a class=" uk-animation-toggle uk-animation-shake" href="mailto:caioxandres2000@gmail.com" target="_blank"><img class="uk-animation-shake" src="img/RS4.png" alt="" width="25px;"></a>
         </div>
 
-        <div id="InformacoesModal" uk-modal>
-          <div class="uk-modal-dialog">
-            <button class="uk-modal-close-default" type="button" uk-close></button>
-            <div class="uk-modal-header">
-              <h2 class="uk-modal-title">Informações em falta</h2>
+        <!-- Menu Mobile -->
+        <div id="offcanvas-push" uk-offcanvas="mode: push; overlay: true">
+            <div class="uk-offcanvas-bar">
+                <ul class="uk-nav uk-nav-default">
+                    <center>
+                        <img src="../CarregarImagens.php?FotoPerfil" class="PerfilFoto">
+                        <p class="PerfilNome"><?php echo $_SESSION['nome'] . " " . $_SESSION['sobrenome'] ?></p>
+                    </center>
+                    <li class="uk-nav-header">Menu Principal</li>
+                    <li class="uk-nav-divider"></li>
+                    <li><a href="Home.php"><span class="uk-margin-small-right" uk-icon="icon: home"></span>Início</a></li>
+                    <li><a href="Cursos.php"><span class="uk-margin-small-right" uk-icon="icon: grid"></span> Cursos</a></li>
+                    <li class="uk-active"><a href="MeusCursos.php"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Meus Cursos</a></li>
+                    <li><a href="Comunidades.php"><span class="uk-margin-small-right" uk-icon="icon: users"></span> Comunidade</a></li>
+                    <li><a href="Comunicados.php"><span class="uk-margin-small-right" uk-icon="icon: comments"></span> Comunicados</a></li>
+                    <li class="uk-nav-header">Opções do Usuário</li>
+                    <li class="uk-nav-divider"></li>
+                    <li><a href="Notificacoes.php"><span class="uk-margin-small-right" uk-icon="icon: bell"></span> Notificações</a></li>
+                    <li><a href="ADMContato.php"><span class="uk-margin-small-right" uk-icon="icon: user"></span> Contato com ADM</a></li>
+                    <li><a href="Configuracoes.php"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> Configurações</a></li>
+                    <li><a href="../Sair.php"><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span> Sair</a></li>
+                    <li class="uk-nav-divider"></li>
+                </ul>
             </div>
-            <div class="uk-modal-body">Se você recebeu essa mensagem ao se inscrever em algum curso e porque seus dados se encontram incompletos. Os dados iniciais de cadastro não são tudo que exigimos para as incrições em nossos cursos.</div>
-            <div class="uk-modal-footer uk-text-right">
-              <button class="uk-button uk-button-secondary btn-color-secundario" type="Completar Cadastro">Completar Cadastro</button>
-              <button class="uk-button uk-button-primary uk-modal-close btn-color-primeiro" type="button">Fechar</button>
-            </div>
-          </div>
         </div>
       
         <!-- Modal de confirmação -->
@@ -230,18 +250,6 @@ $Informacoes = $Video->buscarInformacoes();
                 </p>
             </div>
         </div>
-        
-        <!-- Modal de Completo -->
-        <div id="modal-verifica-completo" uk-modal>
-            <div class="uk-modal-dialog uk-modal-body">
-                <h2 class="uk-modal-title">Sucesso na Tarefa</h2>
-                <p style="color: red">Você comepletou com sucesso esta tarefa, por favor, volte a página do curso e prossiga para tarefas que não foram realizadas</p>
-                <p class="uk-text-right">
-                    <button onclick="window.location.href = 'PainelUsuarioCurso.php?ID=<?php echo $_GET['idCurso'] ?>'" class="uk-button uk-button-primary" type="button">OK, Volte a página do curso</button>
-                </p>
-            </div>
-        </div>
-    
       
     <script type="text/javascript" src="Materializer/js/materialize.min.js"></script>
     
@@ -258,7 +266,12 @@ $Informacoes = $Video->buscarInformacoes();
     function countdownVerificacao(){
         tempoVideo--;
         if(tempoVideo === 0){
-             UIkit.modal("#modal-verifica-completo").show();
+            UIkit.notification({message: 'Tarefa Completa', status: 'success'});
+            $.ajax({
+                method: "POST",
+                url: "../ConclusaoProposta.php",
+                data: { tipo: "Video", idprop: "<?php echo $idVideo ?>", idcurso: "<?php echo $idCurso ?>" }
+            });
         }
         
         if((tempo - 1) >= 0){

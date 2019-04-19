@@ -111,10 +111,25 @@ class PainelCursos {
         }else{
             return '<span style="color: #db0100">Não</span>';
         }
-        
     }
     
-    /**
+    public function registrarConclusão($proposta, $idProposta){
+        $tipo = $proposta;
+        $tabela = "Usuario_has_" . $tipo;
+        $where  = "FK_id" . $tipo . "," . "FK_idUsuario";
+        $condicao = $idProposta . "," . $this->idUsuario;
+        $Read = new Reader($tabela, "*", $where, $condicao);
+        $Read->executarQuery();
+        
+        if($Read->getnumLinhas() == 0){
+           $insert = "`FK_idUsuario`, `FK_id" . $tipo . "`";
+           $condicao2 = $this->idUsuario . "|\|R" . $idProposta;
+           $create = new Create($tabela, $insert, $condicao2);
+           $create->executarQuery();
+        }
+    }
+
+        /**
      * @Descrição: verifica o tipo da proposta
      * @copyright (c) 10/02/2018, Caio Alexandre de Sousa Ramos
      * @versao 2.0 - 10/02/2019
