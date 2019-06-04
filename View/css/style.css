@@ -276,6 +276,54 @@ box-shadow: 0px 6px 17px 0px rgba(0,0,0,0.75);
     background: #222 !important;
 }
 
+.ddquestao{
+    border: 1px solid #3269c4;
+    border-top: 4px solid #3269c4;
+    padding: 15px !important;
+}
+
+.questao{
+    border-bottom: 2px solid #ff3229;
+    padding: 40px 0px;
+}
+
+.figureTarefa{
+    width: 100%;
+}
+
+.figureTarefa img{
+    border: 1px solid #3269c4;
+    border-top: 4px solid #3269c4;
+    padding-top: 10px;
+    margin: 0 auto;
+}
+
+.questaoLC{
+    border: 1px solid #3269c4;
+    border-top: 4px solid #3269c4;
+    padding: 10px !important;
+    height: 100px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.questaoLC{
+    border: 1px solid #3269c4;
+    border-top: 4px solid #3269c4;
+    padding: 10px !important;
+    height: 100px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.questaoLCT{
+    font-size: 50px;
+}
+
+.questaoLC img{
+    height: 75px;
+}
+
 @media screen and (max-width: 810px) {
     #navbarWEB{
         display: none;
@@ -361,5 +409,23 @@ box-shadow: 0px 6px 17px 0px rgba(0,0,0,0.75);
     
     .mobile{
         display: none;
+    }
+}
+
+@media only screen and (min-width: 1200px){
+    html {
+        font-size: 15px;
+    }
+}
+
+@media only screen and (min-width: 992px){
+    html {
+        font-size: 14.5px;
+    }
+}
+
+@media only screen and (min-width: 0){
+    html {
+        font-size: 14px;
     }
 }

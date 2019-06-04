@@ -223,10 +223,10 @@ if(isset($_SESSION['logado'])){
                         <p class="PerfilNome"><?php echo $_SESSION['nome'] . " " . $_SESSION['sobrenome'] ?></p>
                     </center>
                     <li class="uk-active PerfilNome"></li>
-                    <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: bell"></span> Notificações</a></li>
-                    <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Meus Cursos</a></li>
-                    <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: users"></span> Contato com ADM</a></li>
-                    <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> Configurações</a></li>
+                    <li><a href="Notificacoes.php"><span class="uk-margin-small-right" uk-icon="icon: bell"></span> Notificações</a></li>
+                    <li><a href="MeusCursos.php"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Meus Cursos</a></li>
+                    <li><a href="ADMContato.php"><span class="uk-margin-small-right" uk-icon="icon: users"></span> Contato com ADM</a></li>
+                    <li><a href="Configuracoes.php"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> Configurações</a></li>
                     <li class="uk-nav-divider"></li>
                     <li><a href="../Sair.php"><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span> Sair</a></li>
                 </ul>

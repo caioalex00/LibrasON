@@ -130,6 +130,7 @@ CREATE TABLE IF NOT EXISTS `QuestoesFechadas` (
   `Questao` TEXT NOT NULL,
   `Resposta` TEXT NOT NULL,
   `Tipo` INT(11) NOT NULL,
+  `Img` VARCHAR(200),
   `FK_idTarefas` INT(11) NOT NULL,
   PRIMARY KEY (`idQuestoesFechadas`),
     FOREIGN KEY (`FK_idTarefas`)
@@ -142,6 +143,7 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `Alternativa` (
   `idAlternativa` INT(11) NOT NULL AUTO_INCREMENT,
   `Texto` TEXT NOT NULL,
+  `Img` VARCHAR(100) NOT NULL,
   `FK_idQuestoes` INT(11) NOT NULL,
   PRIMARY KEY (`idAlternativa`),
     FOREIGN KEY (`FK_idQuestoes`)
