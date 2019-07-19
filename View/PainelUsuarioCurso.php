@@ -208,6 +208,47 @@ $Curso = $Painel->retornarInfCurso();
             </div>
         </div>
         
+        <div id="Resultado" uk-modal>
+            <div class="uk-modal-dialog">
+                <button class="uk-modal-close-default" type="button" uk-close></button>
+                <div class="uk-modal-header">
+                  <h2 class="uk-modal-title">Resultado da Tarefa</h2>
+                </div>
+                <div class="uk-modal-body">
+                    <?php
+                    $msg = $_GET['msg'];
+                    
+                    if($msg == 1){
+                        echo '<p style="color: #f0506e; font-size: 30px; margin: 10px 0px;">Você acertou ' . $_GET['pct'] . '% das Questões.</p>';
+                        echo "Nossa que pena, para ter tirado essa nota você não deve ter estudado muito!<br> Volte nos vídeos e documentações para aprender e tente novamente!";
+                    }else if ($msg == 2) {
+                        echo '<p style="color: #faa05a; font-size: 30px; margin: 10px 0px;">Você acertou ' . $_GET['pct'] . '% das Questões.</p>';
+                        echo "Você está no caminho correto, porém ainda falta bastante estudo!<br> Volte nos vídeos e documentações para aprender e tente novamente!";
+                    }else if ($msg == 3) {
+                        echo '<p style="color: #1e87f0; font-size: 30px; margin: 10px 0px;">Você acertou ' . $_GET['pct'] . '% das Questões.</p>';
+                        echo "QUASE LÁ! REVISE!<br> Volte nos vídeos e documentações para aprender e tente novamente!";
+                    } else {
+                        echo '<p style="color: #32d296; font-size: 30px; margin: 10px 0px;">Você acertou ' . $_GET['pct'] . '% das Questões.</p>';
+                        echo "Parabéns!!! Você acertou todas as questões... continue as atividades.";
+                    }
+                    ?>
+                    <progress id="js-progressbar" class="uk-progress " value="<?php echo $_GET['pct']?>" max="100"></progress>
+                </div>
+                <div class="uk-modal-footer uk-text-right">
+                    <button class="uk-button uk-button-primary uk-modal-close btn-color-primeiro" type="button">Fechar</button>
+                </div>
+            </div>
+        </div>
+        
+        <?php if(isset($_GET['msg'])){ ?>
+            <script>
+            UIkit.modal('#Resultado').show();
+            
+            </script>
+            
+            
+        <?php } ?>
+        
         <script type="text/javascript">
           UIkit.offcanvas(element, options);
         </script>

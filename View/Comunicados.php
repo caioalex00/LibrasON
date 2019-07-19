@@ -1,3 +1,13 @@
+<?php 
+require_once '../loader.php';
+if(isset($_SESSION['logado'])){
+    if(!$_SESSION['logado']){
+        echo "<script>window.location.href = 'Inicio.php?ERRO=7'</script>";
+    }
+}else{
+    echo "<script>window.location.href = 'Inicio.php?ERRO=7'</script>";
+}
+?>
 <!DOCTYPE html>
 <html lang=pt-br dir="ltr">
   <head>
@@ -14,35 +24,46 @@
   </head>
   <body>
     <div>
-      <div class="uk-navbar-container uk-margin borda-principal" style="margin: 0" uk-navbar>
-        <div class="uk-navbar-left">
-          <a class="uk-navbar-item uk-logo" href="Home.php"><img src="img/Logotipo.png" style="height: 60px"></a>
-          <ul class="uk-navbar-nav">
+            <div class="uk-navbar-container uk-margin borda-principal" style="margin: 0" uk-navbar>
+                <div class="uk-navbar-left">
+                    <a class="uk-navbar-item uk-logo" href="Home.php"><img src="img/Logotipo.png" style="height: 60px"></a>
+                    <ul class="uk-navbar-nav display-none">
 
-              <li>
-                  <a href="Home.php">  Início  </a>
-              </li>
+                        <li class="uk-active">
+                            <a href="Home.php">  Início  </a>
+                        </li>
 
-              <li>
-                  <a href="Cursos.php">  Cursos  </a>
-              </li>
+                        <li>
+                            <a href="Cursos.php">  Cursos  </a>
+                        </li>
+              
+                        <li>
+                            <a href="MeusCursos.php">  Meus Cursos  </a>
+                        </li>
 
-              <li>
-                  <a href="">  Comunidade  </a>
-              </li>
+                        <li>
+                            <a href="Comunidades.php">  Comunidade  </a>
+                        </li>
 
-              <li class="uk-active">
-                  <a href="Comunicados.php">  Comunicados e Novidades  </a>
-              </li>
+                        <li>
+                            <a href="Comunicados.php">  Comunicados e Novidades  </a>
+                        </li>
 
-              <li>
-                  <a href="#offcanvas-nav-primary" uk-toggle>  Nome do Usuário e Sobrenome  </a>
-              </li>
+                        <li>
+                            <a href="#offcanvas-nav-primary" uk-toggle>  <?php echo $_SESSION['nome']?>  </a>
+                        </li>
 
-          </ul>
+                    </ul>
+                </div>
+                
+                <div class="uk-navbar-right">
+                    <ul class="uk-navbar-nav" id="navbarMobile">
+                        <a class="uk-navbar-toggle" uk-navbar-toggle-icon uk-toggle="target: #offcanvas-push"></a>
+                    </ul>
+                </div>
+                
+            </div>
         </div>
-      </div>
-    </div>
 
     <div class="Home">
 
@@ -55,92 +76,10 @@
                 <h5 class="TituloCard" style="margin-top: 0">Tudo que há de novo no LibrasON</h5>
               </div>
             </div>
-
-            <article class="uk-comment uk-comment-primary comentario-stilo">
-              <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
-                <div class="uk-width-auto">
-                  <img class="uk-comment-avatar uk-border-circle" src="img/perfil.jpg" width="80" height="80" alt="">
-                </div>
-                <div class="uk-width-expand">
-                  <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">Autor do comunicado</a></h4>
-                  <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                    <li>Postado em: 10/10/2010 ás 10:10</li>
-                  </ul>
-                </div>
-              </header>
-              <div class="uk-comment-body">
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-              </div>
-            </article>
-
-            <article class="uk-comment uk-comment-primary comentario-stilo">
-              <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
-                <div class="uk-width-auto">
-                  <img class="uk-comment-avatar uk-border-circle" src="img/perfil.jpg" width="80" height="80" alt="">
-                </div>
-                <div class="uk-width-expand">
-                  <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">Autor do comunicado</a></h4>
-                  <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                    <li>Postado em: 10/10/2010 ás 10:10</li>
-                  </ul>
-                </div>
-              </header>
-              <div class="uk-comment-body">
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-              </div>
-            </article>
-
-            <article class="uk-comment uk-comment-primary comentario-stilo">
-              <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
-                <div class="uk-width-auto">
-                  <img class="uk-comment-avatar uk-border-circle" src="img/perfil.jpg" width="80" height="80" alt="">
-                </div>
-                <div class="uk-width-expand">
-                  <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">Autor do comunicado</a></h4>
-                  <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                    <li>Postado em: 10/10/2010 ás 10:10</li>
-                  </ul>
-                </div>
-              </header>
-              <div class="uk-comment-body">
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-              </div>
-            </article>
-
-            <article class="uk-comment uk-comment-primary comentario-stilo">
-              <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
-                <div class="uk-width-auto">
-                  <img class="uk-comment-avatar uk-border-circle" src="img/perfil.jpg" width="80" height="80" alt="">
-                </div>
-                <div class="uk-width-expand">
-                  <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">Autor do comunicado</a></h4>
-                  <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                    <li>Postado em: 10/10/2010 ás 10:10</li>
-                  </ul>
-                </div>
-              </header>
-              <div class="uk-comment-body">
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-              </div>
-            </article>
-
-            <article class="uk-comment uk-comment-primary comentario-stilo">
-              <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
-                <div class="uk-width-auto">
-                  <img class="uk-comment-avatar uk-border-circle" src="img/perfil.jpg" width="80" height="80" alt="">
-                </div>
-                <div class="uk-width-expand">
-                  <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">Autor do comunicado</a></h4>
-                  <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                    <li>Postado em: 10/10/2010 ás 10:10</li>
-                  </ul>
-                </div>
-              </header>
-              <div class="uk-comment-body">
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-              </div>
-            </article>
-
+              <?php
+              $co = new Comunicado();
+              $co->imprimirComunicados();
+              ?>
           </div>
         </div>
       </div>
@@ -188,24 +127,24 @@
     </div>
 
     <div id="offcanvas-nav-primary" uk-offcanvas="overlay: true">
-      <div class="uk-offcanvas-bar uk-flex uk-flex-column PerfilMenu" >
+            <div class="uk-offcanvas-bar uk-flex uk-flex-column PerfilMenu" >
 
-        <ul class="uk-nav uk-nav-primary uk-nav-defaut uk-margin-auto-vertical">
-          <center>
-            <img src="img/perfil.jpg" class="PerfilFoto">
-            <p class="PerfilNome">Nome do Usuário e Sobrenome</p>
-          </center>
-          <li class="uk-active PerfilNome"></li>
-          <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: bell"></span> Notificações</a></li>
-          <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Meus Cursos</a></li>
-          <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: users"></span> Contato com ADM</a></li>
-          <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> Configurações</a></li>
-          <li class="uk-nav-divider"></li>
-          <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span> Sair</a></li>
-        </ul>
+                <ul class="uk-nav uk-nav-primary uk-nav-defaut uk-margin-auto-vertical">
+                    <center>
+                        <img src="../CarregarImagens.php?FotoPerfil" class="PerfilFoto">
+                        <p class="PerfilNome"><?php echo $_SESSION['nome'] . " " . $_SESSION['sobrenome'] ?></p>
+                    </center>
+                    <li class="uk-active PerfilNome"></li>
+                    <li><a href="Notificacoes.php"><span class="uk-margin-small-right" uk-icon="icon: bell"></span> Notificações</a></li>
+                    <li><a href="MeusCursos.php"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Meus Cursos</a></li>
+                    <li><a href="ADMContato.php"><span class="uk-margin-small-right" uk-icon="icon: users"></span> Contato com ADM</a></li>
+                    <li><a href="Configuracoes.php"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> Configurações</a></li>
+                    <li class="uk-nav-divider"></li>
+                    <li><a href="../Sair.php"><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span> Sair</a></li>
+                </ul>
 
-      </div>
-    </div>
+            </div>
+        </div>
 
     <div class="Rodape">
       <center>
@@ -223,20 +162,8 @@
       <a class=" uk-animation-toggle uk-animation-shake" href="https://www.instagram.com/caioalex00/" target="_blank"><img class="uk-animation-shake" src="img/RS3.png" alt="" width="25px;"></a>
       <a class=" uk-animation-toggle uk-animation-shake" href="mailto:caioxandres2000@gmail.com" target="_blank"><img class="uk-animation-shake" src="img/RS4.png" alt="" width="25px;"></a>
     </div>
-
-    <div id="InformacoesModal" uk-modal>
-      <div class="uk-modal-dialog">
-        <button class="uk-modal-close-default" type="button" uk-close></button>
-        <div class="uk-modal-header">
-          <h2 class="uk-modal-title">Informações em falta</h2>
-        </div>
-        <div class="uk-modal-body">Se você recebeu essa mensagem ao se inscrever em algum curso e porque seus dados se encontram incompletos. Os dados iniciais de cadastro não são tudo que exigimos para as incrições em nossos cursos.</div>
-        <div class="uk-modal-footer uk-text-right">
-          <button class="uk-button uk-button-secondary btn-color-secundario" type="Completar Cadastro">Completar Cadastro</button>
-          <button class="uk-button uk-button-primary uk-modal-close btn-color-primeiro" type="button">Fechar</button>
-        </div>
-      </div>
-    </div>
+      
+      
 
     <script type="text/javascript">
       UIkit.offcanvas(element, options);

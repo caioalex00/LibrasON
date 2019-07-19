@@ -73,6 +73,8 @@ class Tarefa {
         for ($i = 1; $i < $n; $i++){
             echo '<input id="qFinal_'. $i .'" name="questao_'. $i .'" type="hidden" value="">';
         }
+        echo '<input name="Curso" value="' . $this->idCurso . '" type="hidden">';
+        echo '<input name="Tarefa" value="' . $this->idTarefa . '" type="hidden">';
         echo '<button type="button" onclick="atualizarForm()" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom  btn-color-primeiro">Submeter respostas</button>';
         echo '</form>';
         $qtQ = $n - 1;
@@ -178,8 +180,8 @@ class Tarefa {
             echo "Dados indisponiveis";
         }
         
-        echo '</div><div uk-sortable="group: sortable-group"><h4>Sinal</h4>';
-        
+        echo '</div>';
+        echo '<div><h4>Sinal</h4><div uk-sortable="group: sortable-group">';
         if(!empty($alternativas)){
             $valor = 1;
             foreach ($alternativas as $alt){
@@ -187,7 +189,7 @@ class Tarefa {
                 $valor++;
             }
         }
-        echo '</div></div></div>';
+        echo '</div></div></div></div>';
     }
     
     /**
@@ -202,6 +204,7 @@ class Tarefa {
         $alternativas = $Read->getResultado();
         
         echo '<div title="Aberta" id="questao_'. $n .'" class="questao">' . "<p>$questao->Questao</p>";
+        echo '<p><strong>OBS:</strong> insira a palavra corretamente sem espaços, qualquer tipo de acento ou letras maiúsculas, caso contrário sua resposta será considerada como incorreta.</p>';
         if(!empty($questao->Img)){
             echo '<center>';
             echo '<figure class="figureTarefa"><img alt="foto da alternativa" src="../Servidor/'. $questao->Img .'"></figure>';
@@ -209,5 +212,46 @@ class Tarefa {
         }
         echo '<div class="uk-margin"> <input class="questaoa uk-input" type="text" placeholder="Digite sua resposta!"> </div>';
         echo '</div>';
+    }
+    
+    public function verificarRespostas($respostas){
+        $respostasBanco = $this->retornarRespostas();
+        
+        $acertos = 0;
+        $erros = 0;
+        
+        for($i = 1; $i < 11; $i++){
+            $acerto = 0;
+            $respB = explode("TYRE||R", $respostasBanco[$i]);
+            
+            foreach ($respB as $value){
+                if($respostas[$i] == $value){
+                    $acerto ++;
+                }
+            }
+            
+            if($acerto > 0){
+                $acertos++;
+            } else {
+                $erros++;
+            }
+        }
+        
+        return $acertos;
+        
+    }
+    
+    private function retornarRespostas(){
+        $reader = new Reader('questoesFechadas', 'Resposta', 'FK_idTarefas', $this->idTarefa);
+        $reader->executarQuery();
+        
+        $re = $reader->getResultado();
+        $resultado = array();
+        
+        for($i = 1; $i < 11; $i++){
+            $resultado[$i] = $re[$i - 1]->Resposta;
+        }
+        
+        return $resultado;
     }
 }

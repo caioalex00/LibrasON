@@ -180,7 +180,7 @@ $DataH = date_format($date, 'H:i:s');
                         <hr class="uk-divider-icon">
 
                         <article class="uk-article" style="width: 80%; margin: 20px auto;">
-                            <p class="uk-article-meta">Escrito por LibrasON | Tarefa disponível desde  15-02-2019 e 17:45:00.
+                            <p class="uk-article-meta">Escrito por LibrasON | Tarefa disponível desde  <?php echo "$DataD e $DataH"?>.
                             <p class="uk-text-lead">Algumas coisas sobre as tarefas dos cursos</p>
                             <p style="text-align: justify">As tarefas são um meio de avaliação do LibrasON, a tarefa só ira se dar por completa quando todas as perguntas estiverem certas. Lembrando que o LibrasON não mostra as respostas corretas a cada tentativa. Sendo assim as tarefas só serão completas se você dominar o assunto. Assista os vídeos! </p>
                             <p style="text-align: justify; color: red">Para um melhor aproveitamento, é necessario que haja uma conexão estável e boa com a internet </p>
